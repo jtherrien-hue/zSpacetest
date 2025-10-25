@@ -16,7 +16,8 @@
       line-height: 1.6;
     }
     .hero-image {
-      background: #0b3a66 url('/zSpacetest/assets/services_image.jpg') center/cover no-repeat;
+      /* Relative path - up two levels, then into assets */
+background-image: url('../../assets/Services_Image.jpg'); center/cover no-repeat;
       height: 300px;
     }
     .title-strip {
@@ -215,7 +216,7 @@
           </ul>
         </div>
         <div class="card-button-container">
-        <a href="/zSpacetest/support/pl_service/" class="card-button">" 
+        <a href="../pl_service/" class="card-button">" 
             Explore Professional Learning
           </a>
         </div>
