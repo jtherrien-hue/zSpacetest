@@ -21,6 +21,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
     }
     .hero-overlay {
       background: rgba(0,0,0,0.45);
@@ -327,24 +328,24 @@
       flex-wrap: wrap;
     }
     .breadcrumb {
-      background: #f8fafc;
-      padding: 12px 16px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-    .breadcrumb-content {
-      max-width: 1100px;
-      margin: 0 auto;
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 10;
     }
     .breadcrumb a {
-      color: #0066cc;
+      color: #fff;
       text-decoration: none;
       font-size: 14px;
       font-weight: 600;
-      transition: color 0.2s;
+      background: rgba(0,0,0,0.5);
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background 0.2s;
+      display: inline-block;
     }
     .breadcrumb a:hover {
-      color: #0052a3;
-      text-decoration: underline;
+      background: rgba(0,0,0,0.7);
     }
     @media (max-width: 768px) {
       .hero-title {
@@ -360,15 +361,13 @@
   </style>
 </head>
 <body>
-  <!-- BREADCRUMB -->
-  <div class="breadcrumb">
-    <div class="breadcrumb-content">
-      <a href="../services/">← View Services</a>
-    </div>
-  </div>
-
   <!-- HERO IMAGE -->
   <div class="hero-image">
+    <!-- BREADCRUMB OVERLAY -->
+    <div class="breadcrumb">
+      <a href="../services/">← View Services</a>
+    </div>
+    
     <div class="hero-overlay">
       <div class="hero-title">zSpace Professional Learning</div>
       <div class="hero-subtitle">Inspire teaching. Accelerate adoption. Sustain impact.</div>
