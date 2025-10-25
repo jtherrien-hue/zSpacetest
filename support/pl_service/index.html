@@ -359,6 +359,32 @@
       }
     }
   </style>
+  <script>
+    // Email fallback handler
+    function handleEmailClick(event, email, subject) {
+      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+      
+      // Try to open mailto
+      const link = document.createElement('a');
+      link.href = mailtoLink;
+      link.click();
+      
+      // Show fallback message after short delay
+      setTimeout(() => {
+        if (document.hasFocus()) {
+          // Still on page - email client might not have opened
+          if (confirm(`Email client not detected.\n\nWould you like to copy ${email} to your clipboard?`)) {
+            navigator.clipboard.writeText(email).then(() => {
+              alert(`Email address copied: ${email}\n\nSubject: ${subject}`);
+            }).catch(() => {
+              // Fallback if clipboard API fails
+              prompt('Copy this email address:', email);
+            });
+          }
+        }
+      }, 500);
+    }
+  </script>
 </head>
 <body>
   <!-- HERO IMAGE -->
@@ -574,7 +600,9 @@
         If you're registered for training and have questions about your schedule, connection link, or materials,
         please reach out to our <strong>Professional Learning team</strong>.
       </p>
-      <a href="mailto:pl@zspace.com?subject=Upcoming%20Professional%20Learning%20Session%20Question&body=Hello%20zSpace%20Professional%20Learning%20Team,%0D%0A%0D%0AI%27m%20scheduled%20for%20an%20upcoming%20training%20and%20have%20a%20question.%0D%0A%0D%0ASchool/District:%20%0D%0ASession%20Date:%20%0D%0ATopic%20(if%20known):%20%0D%0A%0D%0AQuestion:%20%0D%0A%0D%0AThank%20you!%0D%0A" class="btn btn-primary">
+      <a href="mailto:pl@zspace.com?subject=Upcoming%20Professional%20Learning%20Session%20Question" 
+         onclick="handleEmailClick(event, 'pl@zspace.com', 'Upcoming Professional Learning Session Question'); return true;"
+         class="btn btn-primary">
         Contact the PL Team
       </a>
     </div>
@@ -584,7 +612,9 @@
       <p class="callout-title" style="color:#1e3a8a;">Ready to plan the right PL package?</p>
       <p class="callout-text">We'll help you match tiers to your rollout size, timeline, and goals.</p>
       <div class="cta-buttons">
-        <a href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20Planning%20Request&body=Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AWe%E2%80%99d%20like%20help%20selecting/scheduling%20a%20Professional%20Learning%20package.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0ARollout%20size%20(devices/sites):%20%0D%0ATarget%20dates:%20%0D%0AAdditional%20notes:%20%0D%0A" class="btn btn-primary">
+        <a href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20Planning%20Request"
+           onclick="handleEmailClick(event, 'clientservices@zspace.com', 'zSpace Professional Learning Planning Request'); return true;"
+           class="btn btn-primary">
           Contact Client Services
         </a>
       </div>
