@@ -279,6 +279,27 @@
       margin: 36px auto 26px;
       max-width: 900px;
     }
+    .resource-card-link {
+      flex: 1 1 340px;
+      max-width: 360px;
+      background: #fff;
+      border: 1px solid #e0e7ff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      cursor: pointer;
+    }
+    .resource-card-link:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(37,99,169,0.15);
+      border-color: #3b82c4;
+    }
     .callout-title {
       margin: 0;
       color: #1e3a8a;
@@ -501,7 +522,7 @@
     <h2 style="margin-top:28px; margin-bottom:14px;">Resources</h2>
     <div class="card-grid" style="margin-bottom:8px;">
       <!-- Beyond Basics Card -->
-      <a href="https://zspace.com/edu/beyond-basics" target="_blank" rel="noopener noreferrer" style="flex: 1 1 340px; max-width: 360px; background: #fff; border: 1px solid #e0e7ff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer;">
+      <a href="https://zspace.com/edu/beyond-basics" target="_blank" rel="noopener noreferrer" class="resource-card-link">
         <div style="text-align: center; font-size: 36px;">🎓</div>
         <h3 style="text-align: center; color: #2563a9; margin: 8px 0; font-size: 18px;">View Beyond Basics Series</h3>
         <p style="font-size: 14px; color: #4b5563; line-height: 1.6; text-align: center;">
@@ -510,7 +531,7 @@
       </a>
 
       <!-- eBooks Card -->
-      <a href="https://zspace.com/edu/ebooks" target="_blank" rel="noopener noreferrer" style="flex: 1 1 340px; max-width: 360px; background: #fff; border: 1px solid #e0e7ff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); padding: 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer;">
+      <a href="https://zspace.com/edu/ebooks" target="_blank" rel="noopener noreferrer" class="resource-card-link">
         <div style="text-align: center; font-size: 36px;">📚</div>
         <h3 style="text-align: center; color: #2563a9; margin: 8px 0; font-size: 18px;">Browse zSpace eBooks</h3>
         <p style="font-size: 14px; color: #4b5563; line-height: 1.6; text-align: center;">
