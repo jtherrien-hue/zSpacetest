@@ -173,19 +173,23 @@
     }
   </style>
   <script>
-    // Email fallback handler
-    function handleEmailClick(event, email, subject) {
+    // Email fallback handler with full template
+    function handleEmailClick(event, email, subject, body) {
       // Let the mailto link work normally first
       // Only show fallback if user is still on page after delay
       setTimeout(() => {
         if (document.hasFocus()) {
           // Still on page - email client might not have opened
-          if (confirm(`Email client not detected.\n\nWould you like to copy ${email} to your clipboard?`)) {
-            navigator.clipboard.writeText(email).then(() => {
-              alert(`Email address copied: ${email}\n\nSubject: ${subject}`);
+          if (confirm(`Email client not detected.\n\nWould you like to copy the email template to your clipboard?`)) {
+            // Decode the URL-encoded body
+            const decodedBody = decodeURIComponent(body.replace(/\+/g, ' '));
+            const fullTemplate = `Email: ${email}\nSubject: ${subject}\n\n${decodedBody}`;
+            
+            navigator.clipboard.writeText(fullTemplate).then(() => {
+              alert(`Email template copied to clipboard!\n\nYou can now paste it into your email client.`);
             }).catch(() => {
               // Fallback if clipboard API fails
-              prompt('Copy this email address:', email);
+              prompt('Copy this email template:', fullTemplate);
             });
           }
         }
@@ -292,7 +296,7 @@
       <div class="cta-strip-title">Ready to start planning?</div>
       <a
         href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20or%20Technical%20Readiness%20Request&body=Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AI%27d%20like%20to%20confirm%20or%20schedule%20our%20Professional%20Learning%20session%20and/or%20Technical%20Readiness%20meeting.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0APreferred%20Dates:%20%0D%0AType%20of%20Service%20(PL%20Session,%20Readiness,%20or%20Both):%20%0D%0A%0D%0AAdditional%20Notes:%20%0D%0A%0D%0AThank%20you!%0D%0A"
-        onclick="handleEmailClick(event, 'clientservices@zspace.com', 'zSpace Professional Learning or Technical Readiness Request'); return true;"
+        onclick="handleEmailClick(event, 'clientservices@zspace.com', 'zSpace Professional Learning or Technical Readiness Request', 'Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AI%27d%20like%20to%20confirm%20or%20schedule%20our%20Professional%20Learning%20session%20and/or%20Technical%20Readiness%20meeting.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0APreferred%20Dates:%20%0D%0AType%20of%20Service%20(PL%20Session,%20Readiness,%20or%20Both):%20%0D%0A%0D%0AAdditional%20Notes:%20%0D%0A%0D%0AThank%20you!%0D%0A'); return true;"
         class="cta-button">
         Contact Client Services
       </a>
