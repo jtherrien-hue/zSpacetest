@@ -15,8 +15,8 @@
       color: #1f2937;
       line-height: 1.6;
     }
- .hero-image {
-      background: #0b3a66 url('../../assets/Services_Image.webp') center/cover no-repeat;
+    .hero-image {
+      background: url('../../assets/Services_Image.webp') center/cover no-repeat;
       height: 300px;
     }
     .title-strip {
@@ -172,6 +172,32 @@
       }
     }
   </style>
+  <script>
+    // Email fallback handler
+    function handleEmailClick(event, email, subject) {
+      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+      
+      // Try to open mailto
+      const link = document.createElement('a');
+      link.href = mailtoLink;
+      link.click();
+      
+      // Show fallback message after short delay
+      setTimeout(() => {
+        if (document.hasFocus()) {
+          // Still on page - email client might not have opened
+          if (confirm(`Email client not detected.\n\nWould you like to copy ${email} to your clipboard?`)) {
+            navigator.clipboard.writeText(email).then(() => {
+              alert(`Email address copied: ${email}\n\nSubject: ${subject}`);
+            }).catch(() => {
+              // Fallback if clipboard API fails
+              prompt('Copy this email address:', email);
+            });
+          }
+        }
+      }, 500);
+    }
+  </script>
 </head>
 <body>
   <!-- HERO IMAGE -->
@@ -215,7 +241,7 @@
           </ul>
         </div>
         <div class="card-button-container">
-        <a href="../pl_service/" class="card-button">
+          <a href="../pl_service/" class="card-button">
             Explore Professional Learning
           </a>
         </div>
@@ -271,7 +297,8 @@
     <div class="cta-strip-content">
       <div class="cta-strip-title">Ready to start planning?</div>
       <a
-        href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20or%20Technical%20Readiness%20Request&body=Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AI%27d%20like%20to%20confirm%20or%20schedule%20our%20Professional%20Learning%20session%20and/or%20Technical%20Readiness%20meeting.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0APreferred%20Dates:%20%0D%0AType%20of%20Service%20(PL%20Session,%20Readiness,%20or%20Both):%20%0D%0A%0D%0AAdditional%20Notes:%20%0D%0A%0D%0AThank%20you!%0D%0A"
+        href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20or%20Technical%20Readiness%20Request"
+        onclick="handleEmailClick(event, 'clientservices@zspace.com', 'zSpace Professional Learning or Technical Readiness Request'); return true;"
         class="cta-button">
         Contact Client Services
       </a>
