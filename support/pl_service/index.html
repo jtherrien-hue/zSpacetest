@@ -362,14 +362,8 @@
   <script>
     // Email fallback handler
     function handleEmailClick(event, email, subject) {
-      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
-      
-      // Try to open mailto
-      const link = document.createElement('a');
-      link.href = mailtoLink;
-      link.click();
-      
-      // Show fallback message after short delay
+      // Let the mailto link work normally first
+      // Only show fallback if user is still on page after delay
       setTimeout(() => {
         if (document.hasFocus()) {
           // Still on page - email client might not have opened
@@ -382,7 +376,7 @@
             });
           }
         }
-      }, 500);
+      }, 1000);
     }
   </script>
 </head>
