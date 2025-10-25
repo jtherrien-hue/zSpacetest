@@ -175,14 +175,8 @@
   <script>
     // Email fallback handler
     function handleEmailClick(event, email, subject) {
-      const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
-      
-      // Try to open mailto
-      const link = document.createElement('a');
-      link.href = mailtoLink;
-      link.click();
-      
-      // Show fallback message after short delay
+      // Let the mailto link work normally first
+      // Only show fallback if user is still on page after delay
       setTimeout(() => {
         if (document.hasFocus()) {
           // Still on page - email client might not have opened
@@ -195,7 +189,7 @@
             });
           }
         }
-      }, 500);
+      }, 1000);
     }
   </script>
 </head>
@@ -297,7 +291,7 @@
     <div class="cta-strip-content">
       <div class="cta-strip-title">Ready to start planning?</div>
       <a
-        href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20or%20Technical%20Readiness%20Request"
+        href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20or%20Technical%20Readiness%20Request&body=Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AI%27d%20like%20to%20confirm%20or%20schedule%20our%20Professional%20Learning%20session%20and/or%20Technical%20Readiness%20meeting.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0APreferred%20Dates:%20%0D%0AType%20of%20Service%20(PL%20Session,%20Readiness,%20or%20Both):%20%0D%0A%0D%0AAdditional%20Notes:%20%0D%0A%0D%0AThank%20you!%0D%0A"
         onclick="handleEmailClick(event, 'clientservices@zspace.com', 'zSpace Professional Learning or Technical Readiness Request'); return true;"
         class="cta-button">
         Contact Client Services
