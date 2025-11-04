@@ -234,42 +234,73 @@
     </div>
 
     <!-- ===== DELIVERY SECOND ===== -->
-    <h2>Delivery Options</h2>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-icon">💻</div>
-        <h3>Delivered Virtually</h3>
-        <ul>
-          <li>Implementation Planning Call</li>
-          <li>Virtual Technical Readiness check with Technical Services</li>
-          <li>1-hour Virtual "Getting Started" PL</li>
-          <li>Follow-up Virtual Office Hours (1-hr sessions)</li>
-        </ul>
-        <div class="card-note">Virtual elements are included across packages; total hours vary by tier.</div>
-      </div>
-      <div class="card">
-        <div class="card-icon">🏫</div>
-        <h3>Delivered On-Site</h3>
-        <ul>
-          <li>Professional Learning Day(s)</li>
-          <li>Coaching Day(s)</li>
-          <li>Curriculum Integration Day</li>
-          <li>On-Site Tech Check Day (setup, validation, mgmt. training)</li>
-        </ul>
-        <div class="card-note">On-site elements scale with tier; Tech Check supports deployment readiness.</div>
-      </div>
-    </div>
+<h2>Delivery Options</h2>
 
-    <!-- RELATED TECH SERVICES -->
-    <div class="tech-services-box">
-      <div class="tech-services-content">
-        <div class="tech-services-title">Related: Technical Services</div>
-        <div class="tech-services-text">
-          Pair Professional Learning with an on-site Tech Check or deployment support to ensure systems are configured, validated, and managed effectively.
-        </div>
-      </div>
-      <div><a href="https://support.zspace.com/s/technical-services" class="btn btn-primary">Explore Technical Services</a></div>
+<style>
+  /* Non-hover delivery cards */
+  .delivery-card {
+    flex: 1 1 340px;
+    background: #fff;
+    border: 1px solid #e0e7ff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    padding: 22px;
+    transition: none;
+  }
+  .delivery-card-icon {
+    text-align: center;
+    font-size: 34px;
+  }
+  .delivery-card h3 {
+    text-align: center;
+    color: #2563a9;
+    margin: 8px 0 6px;
+    font-weight: 700;
+  }
+  .delivery-card ul {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.6;
+    margin: 12px 0 0 18px;
+  }
+  .delivery-card-note {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 10px;
+  }
+</style>
+
+<div class="card-grid">
+  <!-- Remote PL -->
+  <div class="delivery-card">
+    <div class="delivery-card-icon">💻</div>
+    <h3>Remote PL</h3>
+    <ul>
+      <li>Implementation Planning Call</li>
+      <li>Virtual Technical Readiness Check with Technical Services</li>
+      <li>1-hour Virtual "Getting Started" PL</li>
+      <li>Follow-up Virtual Office Hours (1-hour sessions)</li>
+    </ul>
+    <div class="delivery-card-note">
+      Virtual elements are included across packages; total hours vary by tier.
     </div>
+  </div>
+
+  <!-- Onsite PL -->
+  <div class="delivery-card">
+    <div class="delivery-card-icon">🏫</div>
+    <h3>Onsite PL</h3>
+    <ul>
+      <li>Professional Learning Day(s)</li>
+      <li>Coaching Day(s)</li>
+      <li>Curriculum Integration Day</li>
+      <li>Onsite Tech Check Day (setup, validation, mgmt. training)</li>
+    </ul>
+    <div class="delivery-card-note">
+      Onsite elements scale with tier; Tech Check supports deployment readiness.
+    </div>
+  </div>
+</div>
 
     <!-- RESOURCES -->
     <h2 style="margin-top:28px;margin-bottom:14px;">Resources</h2>
