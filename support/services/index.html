@@ -33,17 +33,17 @@
     }
 
     /* blue shadow top */
-    .card-link::before{
-      content:"";
-      position:absolute;
-      top:0;left:0;right:0;
-      height:5px;
-      border-top-left-radius:18px;
-      border-top-right-radius:18px;
-      background:linear-gradient(90deg,#0066cc,#3b82f6);
-      opacity:.85;
-      box-shadow:0 0 10px rgba(59,130,246,.4);
-    }
+.card-link::before{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:8px; /* slightly thicker for smoother radius */
+  background:linear-gradient(90deg,#0066cc,#3b82f6);
+  border-top-left-radius:18px;
+  border-top-right-radius:18px;
+  box-shadow:0 0 10px rgba(59,130,246,.4);
+  opacity:.9;
+}
 
     .card-link:hover{
       transform:translateY(-8px);
