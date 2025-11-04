@@ -29,32 +29,74 @@
 
     h2{color:#0b3a66;text-align:center;margin:8px 0 18px}
 
-    /* ===== Two-row package grid: 3 on top, 3 on bottom ===== */
+ /* ===== Two-row package grid: 3 + 3 (unchanged layout) ===== */
 .tier-grid{
   display:flex;
-  flex-wrap:wrap;                 /* allow a second row */
+  flex-wrap:wrap;
   gap:18px;
   justify-content:center;
 }
 
-/* Package cards (no hover) */
+/* Package cards (no hover) + header/footer layout */
 .tier-card{
-  flex:0 1 calc((100% - 36px) / 3);  /* 3 per row with 18px gaps */
+  flex:0 1 calc((100% - 36px) / 3);     /* 3 per row with 18px gap */
   max-width:calc((100% - 36px) / 3);
-  min-width:300px;                    /* keeps content readable */
+  min-width:300px;
   background:#fff;
   border-radius:12px;
   padding:18px;
-  transition:none;                    /* no hover */
+  transition:none;
+  display:flex;
+  flex-direction:column;
 }
 
-/* Accents unchanged */
-.tier-bronze{border:2px solid #d1d5db;box-shadow:0 4px 10px rgba(0,0,0,.05)}
-.tier-silver{border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10)}
-.tier-gold{border:2px solid #fcd34d;box-shadow:0 6px 14px rgba(252,211,77,.25)}
-.tier-platinum{border:2px solid #67e8f9;box-shadow:0 6px 14px rgba(103,232,249,.25)}
-.tier-diamond{border:2px solid #f472b6;box-shadow:0 6px 14px rgba(244,114,182,.20)}
-.tier-alacarte{border:2px solid #0066cc;box-shadow:0 6px 14px rgba(0,102,204,.15)}
+/* Header band (uses existing title node) */
+.tier-title{
+  order:1;
+  text-align:center;
+  font-weight:800;
+  padding:12px 10px;
+  margin:-18px -18px 12px;               /* stretch to card edges */
+  background:#f8fbff;
+  border-top-left-radius:12px;
+  border-top-right-radius:12px;
+  border-bottom:1px solid #eef2f7;       /* subtle split from body */
+}
+
+/* Body styling normalized across cards */
+.tier-card hr{display:none;}             /* remove inner rule line */
+.tier-card ul{
+  order:2;
+  font-size:14px;
+  color:#374151;
+  line-height:1.6;
+  list-style:disc;
+  margin:0;
+  padding-left:18px;
+  text-align:left;
+}
+
+/* Move subtitle to the bottom as a footer */
+.tier-subtitle{
+  order:3;
+  margin-top:auto;                       /* push to bottom */
+  text-align:center;
+  font-size:12px;
+  color:#6b7280;
+  padding-top:12px;
+  border-top:1px solid #eef2f7;          /* subtle top divider */
+}
+
+/* Remove the small gray bottom callout line/text entirely */
+.tier-note{display:none}
+
+/* Accent borders (keep your existing palette) */
+.tier-bronze{border:2px solid #d1d5db; box-shadow:0 4px 10px rgba(0,0,0,.05)}
+.tier-silver{border:2px solid #c7d2fe; box-shadow:0 6px 14px rgba(59,130,246,.10)}
+.tier-gold{border:2px solid #fcd34d; box-shadow:0 6px 14px rgba(252,211,77,.25)}
+.tier-platinum{border:2px solid #67e8f9; box-shadow:0 6px 14px rgba(103,232,249,.25)}
+.tier-diamond{border:2px solid #f472b6; box-shadow:0 6px 14px rgba(244,114,182,.20)}
+.tier-alacarte{border:2px solid #0066cc; box-shadow:0 6px 14px rgba(0,102,204,.15)}
 
 /* Responsive: 2 per row, then 1 per row */
 @media (max-width:1000px){
@@ -64,10 +106,7 @@
   }
 }
 @media (max-width:640px){
-  .tier-card{
-    flex:0 1 100%;
-    max-width:100%;
-  }
+  .tier-card{flex:0 1 100%;max-width:100%}
 }
 
     /* Accents */
