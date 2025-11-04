@@ -29,23 +29,46 @@
 
     h2{color:#0b3a66;text-align:center;margin:8px 0 18px}
 
-    /* Package tiers */
-    .tier-grid{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
-    .tier-row{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;width:100%}
-    .tier-row:first-child{max-width:1150px}
-    .tier-row:last-child{max-width:780px;margin-top:16px}
-    .tier-card{flex:1 1 320px;max-width:360px;background:#fff;border-radius:12px;padding:18px;transition:none} /* hover removed */
-    .tier-bronze{border:2px solid #d1d5db;box-shadow:0 4px 10px rgba(0,0,0,.05)}
-    .tier-silver{border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10)}
-    .tier-gold{border:2px solid #fcd34d;box-shadow:0 6px 14px rgba(252,211,77,.25)}
-    .tier-platinum{border:2px solid #67e8f9;box-shadow:0 6px 14px rgba(103,232,249,.25)}
-    .tier-diamond{border:2px solid #f472b6;box-shadow:0 6px 14px rgba(244,114,182,.20)}
-    .tier-title{text-align:center;font-weight:800}
-    .tier-subtitle{text-align:center;font-size:12px;color:#6b7280}
-    .tier-card hr{border:none;border-top:1px solid #eef2f7;margin:10px 0}
-    .tier-card ul{font-size:13px;color:#374151;line-height:1.6;list-style-type:disc;margin:0;padding-left:18px;text-align:left}
-    .tier-note{font-size:11px;color:#6b7280;margin-top:8px}
-    .tier-alacarte{border: 2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10);
+    /* Unified 1-line package grid */
+.tier-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  flex: 1 1 160px;
+}
+
+/* All package cards (no hover) */
+.tier-card {
+  flex: 1 1 260px;          /* keeps them readable while fitting 6 across */
+  max-width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px;
+  transition: none;
+}
+
+/* Existing color classes remain the same */
+.tier-bronze {border:2px solid #d1d5db;box-shadow:0 4px 10px rgba(0,0,0,.05);}
+.tier-silver {border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10);}
+.tier-gold {border:2px solid #fcd34d;box-shadow:0 6px 14px rgba(252,211,77,.25);}
+.tier-platinum {border:2px solid #67e8f9;box-shadow:0 6px 14px rgba(103,232,249,.25);}
+.tier-diamond {border:2px solid #f472b6;box-shadow:0 6px 14px rgba(244,114,182,.20);}
+.tier-alacarte {border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10);}
+
+.tier-title{text-align:center;font-weight:800}
+.tier-subtitle{text-align:center;font-size:12px;color:#6b7280}
+.tier-card hr{border:none;border-top:1px solid #eef2f7;margin:10px 0}
+.tier-card ul{font-size:13px;color:#374151;line-height:1.6;list-style-type:disc;margin:0;padding-left:18px;text-align:left}
+.tier-note{font-size:11px;color:#6b7280;margin-top:8px}
+
+/* Make single-line wrap nicely on small screens */
+@media (max-width:1300px){
+  .tier-card{flex:1 1 45%;max-width:45%;}
+}
+@media (max-width:768px){
+  .tier-card{flex:1 1 100%;max-width:100%;}
+}
 }
 
     .tech-services-box{margin-top:26px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
