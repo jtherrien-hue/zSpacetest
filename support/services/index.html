@@ -32,17 +32,18 @@
       position:relative;cursor:pointer;
     }
 
-    /* blue shadow top */
-.card-link::before{
-  content:"";
-  position:absolute;
-  top:0;left:0;right:0;
-  height:8px; /* slightly thicker for smoother radius */
-  background:linear-gradient(90deg,#0066cc,#3b82f6);
-  border-top-left-radius:18px;
-  border-top-right-radius:18px;
-  box-shadow:0 0 10px rgba(59,130,246,.4);
-  opacity:.9;
+   /* blue shadow top (pill-style inset like screenshot) */
+.card-link::before {
+  content: "";
+  position: absolute;
+  top: 6px;               /* inset slightly for smoother curve */
+  left: 8px;
+  right: 8px;
+  height: 10px;           /* taller for that rounded pill shape */
+  background: linear-gradient(90deg, #0066cc, #3b82f6);
+  border-radius: 10px;    /* full pill rounding for smooth ends */
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
+  opacity: 0.95;
 }
 
     .card-link:hover{
