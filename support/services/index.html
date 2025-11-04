@@ -17,41 +17,45 @@
     .video-wrapper{width:860px;max-width:100%;box-shadow:0 8px 22px rgba(0,0,0,.15);border-radius:10px;overflow:hidden}
     .video-wrapper iframe{width:100%;height:430px;border:0}
 
-    /* Cards layout */
-    .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:32px}
-    .card-link{
-      flex:1 1 500px;max-width:540px;
-      background:#fff;
-      border-radius:18px;
-      border:1px solid #e0e7ff;
-      box-shadow:0 6px 16px rgba(0,0,0,.06);
-      text-decoration:none;color:inherit;
-      padding:40px 32px;
-      display:flex;flex-direction:column;justify-content:flex-start;
-      transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
-      position:relative;cursor:pointer;
-    }
-
-   /* blue shadow top (pill-style inset like screenshot) */
-.card-link::before {
-  content: "";
-  position: absolute;
-  top: 6px;               /* inset slightly for smoother curve */
-  left: 8px;
-  right: 8px;
-  height: 10px;           /* taller for that rounded pill shape */
-  background: linear-gradient(90deg, #0066cc, #3b82f6);
-  border-radius: 10px;    /* full pill rounding for smooth ends */
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.25);
-  opacity: 0.95;
+  /* Cards layout */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
 }
 
-    .card-link:hover{
-      transform:translateY(-8px);
-      box-shadow:0 16px 32px rgba(37,99,169,.18);
-      border-color:#3b82c4;
-    }
-    .card-link:focus-visible{outline:3px solid #3b82c4;outline-offset:4px}
+/* Card container */
+.card-link {
+  flex: 1 1 500px;
+  max-width: 540px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e7ff;
+  border-top: 4px solid #0066cc; /* 👈 solid blue top border */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: inherit;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Hover interaction */
+.card-link:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(37, 99, 169, 0.15);
+  border-color: #3b82c4;
+}
+
+.card-link:focus-visible {
+  outline: 3px solid #3b82c4;
+  outline-offset: 4px;
+}
 
     .card-icon{text-align:center;font-size:44px;margin-bottom:8px}
     .card-link h3{text-align:center;color:#1e3a8a;margin:8px 0 14px;font-size:22px;font-weight:800}
