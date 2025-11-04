@@ -29,28 +29,46 @@
 
     h2{color:#0b3a66;text-align:center;margin:8px 0 18px}
 
-    /* ===== One-line packages strip ===== */
-    .tier-grid{
-      display:flex;
-      flex-wrap:nowrap;           /* one line */
-      gap:18px;
-      overflow-x:auto;            /* scroll if viewport is narrow */
-      -webkit-overflow-scrolling:touch;
-      padding-bottom:6px;
-    }
-    .tier-grid::-webkit-scrollbar{height:8px}
-    .tier-grid::-webkit-scrollbar-thumb{background:#e5e7eb;border-radius:8px}
+    /* ===== Two-row package grid: 3 on top, 3 on bottom ===== */
+.tier-grid{
+  display:flex;
+  flex-wrap:wrap;                 /* allow a second row */
+  gap:18px;
+  justify-content:center;
+}
 
-    /* Package cards (no hover) */
-    .tier-card{
-      flex:0 0 300px;             /* fixed width per card so 6 sit on one line; scrolls if needed */
-      min-width:280px;
-      max-width:320px;
-      background:#fff;
-      border-radius:12px;
-      padding:18px;
-      transition:none;
-    }
+/* Package cards (no hover) */
+.tier-card{
+  flex:0 1 calc((100% - 36px) / 3);  /* 3 per row with 18px gaps */
+  max-width:calc((100% - 36px) / 3);
+  min-width:300px;                    /* keeps content readable */
+  background:#fff;
+  border-radius:12px;
+  padding:18px;
+  transition:none;                    /* no hover */
+}
+
+/* Accents unchanged */
+.tier-bronze{border:2px solid #d1d5db;box-shadow:0 4px 10px rgba(0,0,0,.05)}
+.tier-silver{border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10)}
+.tier-gold{border:2px solid #fcd34d;box-shadow:0 6px 14px rgba(252,211,77,.25)}
+.tier-platinum{border:2px solid #67e8f9;box-shadow:0 6px 14px rgba(103,232,249,.25)}
+.tier-diamond{border:2px solid #f472b6;box-shadow:0 6px 14px rgba(244,114,182,.20)}
+.tier-alacarte{border:2px solid #0066cc;box-shadow:0 6px 14px rgba(0,102,204,.15)}
+
+/* Responsive: 2 per row, then 1 per row */
+@media (max-width:1000px){
+  .tier-card{
+    flex:0 1 calc((100% - 18px) / 2);
+    max-width:calc((100% - 18px) / 2);
+  }
+}
+@media (max-width:640px){
+  .tier-card{
+    flex:0 1 100%;
+    max-width:100%;
+  }
+}
 
     /* Accents */
     .tier-bronze{border:2px solid #d1d5db;box-shadow:0 4px 10px rgba(0,0,0,.05)}
