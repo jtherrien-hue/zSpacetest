@@ -128,9 +128,20 @@
     .tech-services-title{font-weight:800;color:#0b3a66;margin-bottom:4px;font-size:16px}
     .tech-services-text{font-size:14px;color:#374151;line-height:1.6}
 
-    .btn{display:inline-block;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:800;font-size:13px;transition:opacity .2s}
-    .btn:hover{opacity:.9}
-    .btn-primary{background:#0066cc;color:#fff}
+   /* Updated button hover to match Services page */
+.btn-primary {
+  background: #0066cc;
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #0052a3;                /* darker blue like Services cards */
+  transform: translateY(-2px);        /* slight lift */
+  box-shadow: 0 6px 16px rgba(37, 99, 169, 0.25);  /* soft zSpace-blue glow */
+}
 
     .callout-box{background:#f0f7ff;border-left:5px solid #2563a9;border-radius:8px;padding:22px 20px;text-align:center;margin:36px auto 20px;max-width:900px}
     .resource-card-link{flex:1 1 340px;max-width:360px;background:#fff;border:1px solid #e0e7ff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06);padding:24px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-decoration:none;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;cursor:pointer}
