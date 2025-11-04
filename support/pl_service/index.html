@@ -30,11 +30,13 @@
     h2{color:#0b3a66;text-align:center;margin:8px 0 18px}
 
  /* ===== Two-row package grid: 3 + 3 (unchanged layout) ===== */
-.tier-grid{
-  display:flex;
-  flex-wrap:wrap;
-  gap:18px;
-  justify-content:center;
+/* Add spacing below packages before Delivery Options */
+.tier-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: center;
+  margin-bottom: 60px; /* 👈 add extra space below package grid */
 }
 
 /* Package cards (no hover) + header/footer layout */
