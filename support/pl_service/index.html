@@ -45,6 +45,11 @@
     .tier-card hr{border:none;border-top:1px solid #eef2f7;margin:10px 0}
     .tier-card ul{font-size:13px;color:#374151;line-height:1.6;list-style-type:disc;margin:0;padding-left:18px;text-align:left}
     .tier-note{font-size:11px;color:#6b7280;margin-top:8px}
+    /* New: A la Cart package card */
+.tier-alacarte{
+  border: 2px solid #c7d2fe;                 /* same family as Silver */
+  box-shadow: 0 6px 14px rgba(59,130,246,.10);
+}
 
     /* A la Cart block (add-ons inside a card) */
     .alacart-card{flex:1 1 100%;max-width:1100px;background:#fff;border:1px solid #e0e7ff;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.06);padding:22px}
@@ -156,38 +161,56 @@
           <div class="tier-note">Recommended baseline for most sites.</div>
         </div>
       </div>
-      <div class="tier-row">
-        <div class="tier-card tier-platinum">
-          <div class="tier-title" style="color:#065f46;">Platinum</div>
-          <div class="tier-subtitle">Teaching & Learning (for large impl. or 2-yr licenses)</div>
-          <hr>
-          <ul>
-            <li>Virtual Planning + Tech Check</li>
-            <li>3 On-site PL Days</li>
-            <li>1 On-site Coaching Day</li>
-            <li>1 On-site Curriculum Integration Day</li>
-            <li>Follow-up Office Hours (x5)</li>
-            <li>Total Virtual Hours: 6</li>
-            <li>On-Site Tech Check Day</li>
-          </ul>
-          <div class="tier-note">Deeper coaching + integration support.</div>
-        </div>
-        <div class="tier-card tier-diamond">
-          <div class="tier-title" style="color:#831843;">Diamond</div>
-          <div class="tier-subtitle">Teaching & Integration (for large impl. or 3-yr licenses)</div>
-          <hr>
-          <ul>
-            <li>Virtual Planning + Tech Check</li>
-            <li>3 On-site PL Days</li>
-            <li>2 On-site Coaching Days</li>
-            <li>1 On-site Curriculum Integration Day</li>
-            <li>Follow-up Office Hours (x5)</li>
-            <li>Total Virtual Hours: 8</li>
-            <li>On-Site Tech Check Day</li>
-          </ul>
-          <div class="tier-note">Best for multi-year, multi-site success.</div>
-        </div>
-      </div>
+      <!-- Bottom Row (now 3 cards) -->
+<div class="tier-row">
+  <!-- Platinum -->
+  <div class="tier-card tier-platinum">
+    <div class="tier-title" style="color:#065f46;">Platinum</div>
+    <div class="tier-subtitle">Teaching & Learning (for large impl. or 2-yr licenses)</div>
+    <hr>
+    <ul>
+      <li>Virtual Planning + Tech Check</li>
+      <li>3 On-site PL Days</li>
+      <li>1 On-site Coaching Day</li>
+      <li>1 On-site Curriculum Integration Day</li>
+      <li>Follow-up Office Hours (x5)</li>
+      <li>Total Virtual Hours: 6</li>
+      <li>On-Site Tech Check Day</li>
+    </ul>
+    <div class="tier-note">Deeper coaching + integration support.</div>
+  </div>
+
+  <!-- Diamond -->
+  <div class="tier-card tier-diamond">
+    <div class="tier-title" style="color:#831843;">Diamond</div>
+    <div class="tier-subtitle">Teaching & Integration (for large impl. or 3-yr licenses)</div>
+    <hr>
+    <ul>
+      <li>Virtual Planning + Tech Check</li>
+      <li>3 On-site PL Days</li>
+      <li>2 On-site Coaching Days</li>
+      <li>1 On-site Curriculum Integration Day</li>
+      <li>Follow-up Office Hours (x5)</li>
+      <li>Total Virtual Hours: 8</li>
+      <li>On-Site Tech Check Day</li>
+    </ul>
+    <div class="tier-note">Best for multi-year, multi-site success.</div>
+  </div>
+
+  <!-- A la Cart (new 6th card) -->
+  <div class="tier-card tier-alacarte">
+    <div class="tier-title" style="color:#1e3a8a;">A la Cart</div>
+    <div class="tier-subtitle">Add-ons to customize any package</div>
+    <hr>
+    <ul>
+      <li>Virtual Follow-Up Hours (5×1-hr)</li>
+      <li>Curriculum Integration / Mapping</li>
+      <li>On-Site Coaching (1-1; max 2 teachers/day)</li>
+      <li>Half-Day Professional Learning (add-on)</li>
+    </ul>
+    <div class="tier-note">Available with package purchase.</div>
+  </div>
+</div>
     </div>
 
     <!-- ===== DELIVERY SECOND ===== -->
