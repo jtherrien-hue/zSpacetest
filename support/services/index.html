@@ -19,7 +19,6 @@
 
     /* Cards */
     .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
-    /* Make the whole card an anchor */
     .card-link{
       flex:1 1 320px;max-width:340px;display:flex;flex-direction:column;justify-content:space-between;
       text-decoration:none;color:inherit;background:#fff;border:1px solid #e0e7ff;border-radius:12px;
@@ -33,12 +32,6 @@
     .card-description{font-size:14px;color:#4b5563;line-height:1.6;text-align:center}
     .card-link ul{font-size:13px;color:#374151;line-height:1.6;margin:14px 0 0 18px;padding-left:0}
     .card-link li{margin-bottom:4px}
-    .card-cta{margin-top:16px;text-align:center;font-weight:700;font-size:13px}
-    .chip{
-      display:inline-block;background:#0066cc;color:#fff;padding:8px 14px;border-radius:8px;
-      transition:transform .2s,background-color .2s
-    }
-    .card-link:hover .chip{background:#0052a3;transform:translateY(-2px)}
 
     .cta-strip{background:#3b82c4;color:#fff;padding:22px 12px;text-align:center}
     .cta-strip-content{max-width:1100px;margin:0 auto}
@@ -84,9 +77,9 @@
       </div>
     </div>
 
-    <!-- TWO-CARD GRID (center card removed) -->
+    <!-- TWO-CARD GRID -->
     <div class="card-grid">
-      <!-- Professional Learning (full-card link) -->
+      <!-- Professional Learning -->
       <a class="card-link" href="../pl_service/">
         <div>
           <div class="card-icon">🎓</div>
@@ -100,10 +93,9 @@
             <li>Ongoing PD and office hours</li>
           </ul>
         </div>
-        <div class="card-cta"><span class="chip">Explore Professional Learning</span></div>
       </a>
 
-      <!-- Technical Services (full-card link) -->
+      <!-- Technical Services -->
       <a class="card-link" href="https://support.zspace.com/s/technical-services">
         <div>
           <div class="card-icon">🧰</div>
@@ -117,7 +109,6 @@
             <li>App Manager &amp; network optimization</li>
           </ul>
         </div>
-        <div class="card-cta"><span class="chip">Explore Technical Services</span></div>
       </a>
     </div>
   </div>
