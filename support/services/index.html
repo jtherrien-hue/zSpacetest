@@ -1,207 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>zSpace Technical Services & Professional Learning</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Arial,Helvetica,sans-serif;color:#1f2937;line-height:1.6}
+    .hero-image{background:url('../../assets/Services_Image.webp') center/cover no-repeat;height:300px}
+    .title-strip{background:#3b82c4;color:#fff;text-align:center;padding:18px 12px}
+    .title-strip-content{max-width:1100px;margin:0 auto}
+    .title-strip h1{font-weight:700;font-size:20px;letter-spacing:.3px;line-height:1.4}
+    .title-strip p{opacity:.95;font-size:15px;margin-top:6px;line-height:1.5}
+    .page-body{max-width:1100px;margin:0 auto;padding:28px 16px 40px}
+    .video-container{display:flex;justify-content:center;margin:10px 0 40px}
+    .video-wrapper{width:760px;max-width:100%;box-shadow:0 8px 22px rgba(0,0,0,.15);border-radius:6px;overflow:hidden}
+    .video-wrapper iframe{width:100%;height:430px;border:0}
+
+    /* Cards */
+    .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
+    /* Make the whole card an anchor */
+    .card-link{
+      flex:1 1 320px;max-width:340px;display:flex;flex-direction:column;justify-content:space-between;
+      text-decoration:none;color:inherit;background:#fff;border:1px solid #e0e7ff;border-radius:12px;
+      box-shadow:0 4px 14px rgba(0,0,0,.06);padding:24px;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+      position:relative;cursor:pointer
     }
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #1f2937;
-      line-height: 1.6;
+    .card-link:hover{transform:translateY(-8px);box-shadow:0 12px 28px rgba(37,99,169,.15);border-color:#3b82c4}
+    .card-link:focus-visible{outline:3px solid #3b82c4;outline-offset:4px}
+    .card-icon{text-align:center;font-size:36px}
+    .card-link h3{text-align:center;color:#2563a9;margin:8px 0;font-size:18px}
+    .card-description{font-size:14px;color:#4b5563;line-height:1.6;text-align:center}
+    .card-link ul{font-size:13px;color:#374151;line-height:1.6;margin:14px 0 0 18px;padding-left:0}
+    .card-link li{margin-bottom:4px}
+    .card-cta{margin-top:16px;text-align:center;font-weight:700;font-size:13px}
+    .chip{
+      display:inline-block;background:#0066cc;color:#fff;padding:8px 14px;border-radius:8px;
+      transition:transform .2s,background-color .2s
     }
-    .hero-image {
-      background: url('../../assets/Services_Image.webp') center/cover no-repeat;
-      height: 300px;
-    }
-    .title-strip {
-      background: #3b82c4;
-      color: #fff;
-      text-align: center;
-      padding: 18px 12px;
-    }
-    .title-strip-content {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .title-strip h1 {
-      font-weight: 700;
-      font-size: 20px;
-      letter-spacing: 0.3px;
-      line-height: 1.4;
-    }
-    .title-strip p {
-      opacity: 0.95;
-      font-size: 15px;
-      margin-top: 6px;
-      line-height: 1.5;
-    }
-    .page-body {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 28px 16px 40px;
-    }
-    .video-container {
-      display: flex;
-      justify-content: center;
-      margin: 10px 0 40px;
-    }
-    .video-wrapper {
-      width: 760px;
-      max-width: 100%;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.15);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .video-wrapper iframe {
-      width: 100%;
-      height: 430px;
-      border: 0;
-    }
-    .card-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 24px;
-    }
-    .card {
-      flex: 1 1 320px;
-      max-width: 340px;
-      background: #fff;
-      border: 1px solid #e0e7ff;
-      border-radius: 12px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 28px rgba(37,99,169,0.15);
-      border-color: #3b82c4;
-    }
-    .card-icon {
-      text-align: center;
-      font-size: 36px;
-    }
-    .card h3 {
-      text-align: center;
-      color: #2563a9;
-      margin: 8px 0;
-      font-size: 18px;
-    }
-    .card-description {
-      font-size: 14px;
-      color: #4b5563;
-      line-height: 1.6;
-      text-align: center;
-    }
-    .card ul {
-      font-size: 13px;
-      color: #374151;
-      line-height: 1.6;
-      margin: 14px 0 0 18px;
-      padding-left: 0;
-    }
-    .card li {
-      margin-bottom: 4px;
-    }
-    .card-button-container {
-      text-align: center;
-      margin-top: 16px;
-    }
-    .card-button {
-      display: inline-block;
-      background: #0066cc;
-      color: #fff;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 13px;
-      transition: background-color 0.2s, transform 0.2s;
-    }
-    .card-button:hover {
-      background-color: #0052a3;
-      transform: translateY(-2px);
-    }
-    .cta-strip {
-      background: #3b82c4;
-      color: #fff;
-      padding: 22px 12px;
-      text-align: center;
-    }
-    .cta-strip-content {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .cta-strip-title {
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      margin-bottom: 8px;
-    }
-    .cta-button {
-      display: inline-block;
-      padding: 10px 16px;
-      background: #0066cc;
-      color: #ffffff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 13px;
-      transition: background-color 0.2s, transform 0.2s;
-    }
-    .cta-button:hover {
-      background: #0052a3;
-      transform: translateY(-2px);
-    }
-    @media (max-width: 768px) {
-      .video-wrapper iframe {
-        height: 300px;
-      }
-      .card {
-        max-width: 100%;
-      }
+    .card-link:hover .chip{background:#0052a3;transform:translateY(-2px)}
+
+    .cta-strip{background:#3b82c4;color:#fff;padding:22px 12px;text-align:center}
+    .cta-strip-content{max-width:1100px;margin:0 auto}
+    .cta-strip-title{font-weight:800;letter-spacing:.2px;margin-bottom:8px}
+    .cta-button{display:inline-block;padding:10px 16px;background:#0066cc;color:#fff;border-radius:8px;text-decoration:none;font-weight:800;font-size:13px;transition:background-color .2s,transform .2s}
+    .cta-button:hover{background:#0052a3;transform:translateY(-2px)}
+
+    @media (max-width:768px){
+      .video-wrapper iframe{height:300px}
+      .card-link{max-width:100%}
     }
   </style>
   <script>
-    // Email fallback handler with full template
-    function handleEmailClick(event, email, subject, body) {
-      // Let the mailto link work normally first
-      // Only show fallback if user is still on page after delay
-      setTimeout(() => {
-        if (document.hasFocus()) {
-          // Still on page - email client might not have opened
-          if (confirm(`Email client not detected.\n\nWould you like to copy the email template to your clipboard?`)) {
-            // Decode the URL-encoded body
-            const decodedBody = decodeURIComponent(body.replace(/\+/g, ' '));
-            const fullTemplate = `Email: ${email}\nSubject: ${subject}\n\n${decodedBody}`;
-            
-            navigator.clipboard.writeText(fullTemplate).then(() => {
-              alert(`Email template copied to clipboard!\n\nYou can now paste it into your email client.`);
-            }).catch(() => {
-              // Fallback if clipboard API fails
-              prompt('Copy this email template:', fullTemplate);
-            });
-          }
-        }
-      }, 1000);
+    function handleEmailClick(event,email,subject,body){
+      setTimeout(()=>{if(document.hasFocus()){
+        if(confirm('Email client not detected.\n\nWould you like to copy the email template to your clipboard?')){
+          const decodedBody=decodeURIComponent(body.replace(/\+/g,' '));
+          const full=`Email: ${email}\nSubject: ${subject}\n\n${decodedBody}`;
+          navigator.clipboard.writeText(full).then(()=>alert('Email template copied to clipboard!\n\nYou can now paste it into your email client.'))
+          .catch(()=>prompt('Copy this email template:',full));
+        }}},1000);
     }
   </script>
 </head>
 <body>
-  <!-- HERO IMAGE -->
+  <!-- HERO -->
   <div class="hero-image"></div>
 
-  <!-- THIN BLUE TITLE STRIP -->
+  <!-- TITLE STRIP -->
   <div class="title-strip">
     <div class="title-strip-content">
       <h1>zSpace Technical Services &amp; Professional Learning</h1>
@@ -209,23 +75,19 @@
     </div>
   </div>
 
-  <!-- PAGE BODY -->
+  <!-- BODY -->
   <div class="page-body">
     <!-- CENTERED VIDEO -->
     <div class="video-container">
       <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/avNuW4e3i3U?si=McHePGWEXdMjBdPY&modestbranding=1&rel=0"
-          title="zSpace Services Overview"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/avNuW4e3i3U?si=McHePGWEXdMjBdPY&modestbranding=1&rel=0" title="zSpace Services Overview" allowfullscreen></iframe>
       </div>
     </div>
 
-    <!-- CARD GRID -->
+    <!-- TWO-CARD GRID (center card removed) -->
     <div class="card-grid">
-      <!-- Professional Learning Card -->
-      <div class="card">
+      <!-- Professional Learning (full-card link) -->
+      <a class="card-link" href="../pl_service/">
         <div>
           <div class="card-icon">🎓</div>
           <h3>Professional Learning</h3>
@@ -238,37 +100,11 @@
             <li>Ongoing PD and office hours</li>
           </ul>
         </div>
-        <div class="card-button-container">
-          <a href="../pl_service/" class="card-button">
-            Explore Professional Learning
-          </a>
-        </div>
-      </div>
+        <div class="card-cta"><span class="chip">Explore Professional Learning</span></div>
+      </a>
 
-      <!-- Online Resources Card -->
-      <div class="card">
-        <div>
-          <div class="card-icon">💻</div>
-          <h3>Educator Resources</h3>
-          <p class="card-description">
-            Research, Learn, and Experience Lessons with AR/VR — designed to complement on-site PL.
-          </p>
-          <ul>
-            <li>zSpace 101</li>
-            <li>Standards &amp; Strategies</li>
-            <li>Lessons</li>
-            <li>Applications</li>
-          </ul>
-        </div>
-        <div class="card-button-container">
-          <a href="https://zspace.com/edu" target="_blank" rel="noopener noreferrer" class="card-button">
-            Explore
-          </a>
-        </div>
-      </div>
-
-      <!-- Technical Services Card -->
-      <div class="card">
+      <!-- Technical Services (full-card link) -->
+      <a class="card-link" href="https://support.zspace.com/s/technical-services">
         <div>
           <div class="card-icon">🧰</div>
           <h3>Technical Services</h3>
@@ -281,25 +117,19 @@
             <li>App Manager &amp; network optimization</li>
           </ul>
         </div>
-        <div class="card-button-container">
-          <a href="https://support.zspace.com/s/technical-services" class="card-button">
-            Explore Technical Services
-          </a>
-        </div>
-      </div>
+        <div class="card-cta"><span class="chip">Explore Technical Services</span></div>
+      </a>
     </div>
   </div>
 
-  <!-- BLUE CTA STRIP -->
+  <!-- CTA STRIP -->
   <div class="cta-strip">
     <div class="cta-strip-content">
       <div class="cta-strip-title">Ready to start planning?</div>
       <a
         href="mailto:clientservices@zspace.com?subject=zSpace%20Professional%20Learning%20or%20Technical%20Readiness%20Request&body=Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AI%27d%20like%20to%20confirm%20or%20schedule%20our%20Professional%20Learning%20session%20and/or%20Technical%20Readiness%20meeting.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0APreferred%20Dates:%20%0D%0AType%20of%20Service%20(PL%20Session,%20Readiness,%20or%20Both):%20%0D%0A%0D%0AAdditional%20Notes:%20%0D%0A%0D%0AThank%20you!%0D%0A"
-        onclick="handleEmailClick(event, 'clientservices@zspace.com', 'zSpace Professional Learning or Technical Readiness Request', 'Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AI%27d%20like%20to%20confirm%20or%20schedule%20our%20Professional%20Learning%20session%20and/or%20Technical%20Readiness%20meeting.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0APreferred%20Dates:%20%0D%0AType%20of%20Service%20(PL%20Session,%20Readiness,%20or%20Both):%20%0D%0A%0D%0AAdditional%20Notes:%20%0D%0A%0D%0AThank%20you!%0D%0A'); return true;"
-        class="cta-button">
-        Contact Client Services
-      </a>
+        onclick="handleEmailClick(event,'clientservices@zspace.com','zSpace Professional Learning or Technical Readiness Request','Hello%20zSpace%20Client%20Services%20Team,%0D%0A%0D%0AI%27d%20like%20to%20confirm%20or%20schedule%20our%20Professional%20Learning%20session%20and/or%20Technical%20Readiness%20meeting.%0D%0A%0D%0ASchool/District:%20%0D%0AContact%20Name:%20%0D%0AEmail:%20%0D%0APhone:%20%0D%0APreferred%20Dates:%20%0D%0AType%20of%20Service%20(PL%20Session,%20Readiness,%20or%20Both):%20%0D%0A%0D%0AAdditional%20Notes:%20%0D%0A%0D%0AThank%20you!%0D%0A'); return true;"
+        class="cta-button">Contact Client Services</a>
     </div>
   </div>
 </body>
