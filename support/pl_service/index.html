@@ -29,47 +29,42 @@
 
     h2{color:#0b3a66;text-align:center;margin:8px 0 18px}
 
-    /* Unified 1-line package grid */
-.tier-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 18px;
-  flex: 1 1 160px;
-}
+    /* ===== One-line packages strip ===== */
+    .tier-grid{
+      display:flex;
+      flex-wrap:nowrap;           /* one line */
+      gap:18px;
+      overflow-x:auto;            /* scroll if viewport is narrow */
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:6px;
+    }
+    .tier-grid::-webkit-scrollbar{height:8px}
+    .tier-grid::-webkit-scrollbar-thumb{background:#e5e7eb;border-radius:8px}
 
-/* All package cards (no hover) */
-.tier-card {
-  flex: 1 1 260px;          /* keeps them readable while fitting 6 across */
-  max-width: 300px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 18px;
-  transition: none;
-}
+    /* Package cards (no hover) */
+    .tier-card{
+      flex:0 0 300px;             /* fixed width per card so 6 sit on one line; scrolls if needed */
+      min-width:280px;
+      max-width:320px;
+      background:#fff;
+      border-radius:12px;
+      padding:18px;
+      transition:none;
+    }
 
-/* Existing color classes remain the same */
-.tier-bronze {border:2px solid #d1d5db;box-shadow:0 4px 10px rgba(0,0,0,.05);}
-.tier-silver {border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10);}
-.tier-gold {border:2px solid #fcd34d;box-shadow:0 6px 14px rgba(252,211,77,.25);}
-.tier-platinum {border:2px solid #67e8f9;box-shadow:0 6px 14px rgba(103,232,249,.25);}
-.tier-diamond {border:2px solid #f472b6;box-shadow:0 6px 14px rgba(244,114,182,.20);}
-.tier-alacarte {border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10);}
+    /* Accents */
+    .tier-bronze{border:2px solid #d1d5db;box-shadow:0 4px 10px rgba(0,0,0,.05)}
+    .tier-silver{border:2px solid #c7d2fe;box-shadow:0 6px 14px rgba(59,130,246,.10)}
+    .tier-gold{border:2px solid #fcd34d;box-shadow:0 6px 14px rgba(252,211,77,.25)}
+    .tier-platinum{border:2px solid #67e8f9;box-shadow:0 6px 14px rgba(103,232,249,.25)}
+    .tier-diamond{border:2px solid #f472b6;box-shadow:0 6px 14px rgba(244,114,182,.20)}
+    .tier-alacarte{border:2px solid #0066cc;box-shadow:0 6px 14px rgba(0,102,204,.15)} /* slight distinction */
 
-.tier-title{text-align:center;font-weight:800}
-.tier-subtitle{text-align:center;font-size:12px;color:#6b7280}
-.tier-card hr{border:none;border-top:1px solid #eef2f7;margin:10px 0}
-.tier-card ul{font-size:13px;color:#374151;line-height:1.6;list-style-type:disc;margin:0;padding-left:18px;text-align:left}
-.tier-note{font-size:11px;color:#6b7280;margin-top:8px}
-
-/* Make single-line wrap nicely on small screens */
-@media (max-width:1300px){
-  .tier-card{flex:1 1 45%;max-width:45%;}
-}
-@media (max-width:768px){
-  .tier-card{flex:1 1 100%;max-width:100%;}
-}
-}
+    .tier-title{text-align:center;font-weight:800}
+    .tier-subtitle{text-align:center;font-size:12px;color:#6b7280}
+    .tier-card hr{border:none;border-top:1px solid #eef2f7;margin:10px 0}
+    .tier-card ul{font-size:13px;color:#374151;line-height:1.6;list-style-type:disc;margin:0;padding-left:18px;text-align:left}
+    .tier-note{font-size:11px;color:#6b7280;margin-top:8px}
 
     .tech-services-box{margin-top:26px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
     .tech-services-content{flex:1;min-width:260px}
@@ -96,7 +91,7 @@
     @media (max-width:768px){
       .hero-title{font-size:24px}
       .card{flex:1 1 100%}
-      .tier-card{max-width:100%}
+      .tier-card{min-width:260px}
     }
   </style>
   <script>
@@ -129,99 +124,95 @@
   </div>
 
   <div class="page-body">
-    <!-- ===== PACKAGES FIRST ===== -->
+    <!-- ===== PACKAGES — one line ===== -->
     <h2>Professional Learning Packages</h2>
     <div class="tier-grid">
-      <div class="tier-row">
-        <div class="tier-card tier-bronze">
-          <div class="tier-title" style="color:#374151;">Bronze</div>
-          <div class="tier-subtitle">zSpace Basic</div>
-          <hr>
-          <ul>
-            <li>Virtual Planning + Tech Check</li>
-            <li>1-hr Virtual Getting Started PL</li>
-            <li>Follow-up Office Hours (x1)</li>
-            <li>Total Virtual Hours: 3</li>
-          </ul>
-          <div class="tier-note">Great for very small pilots.</div>
-        </div>
-        <div class="tier-card tier-silver">
-          <div class="tier-title" style="color:#1e3a8a;">Silver</div>
-          <div class="tier-subtitle">Getting Started (5–10 devices, 1 campus)</div>
-          <hr>
-          <ul>
-            <li>Virtual Planning + Tech Check</li>
-            <li>1 On-site PL Day</li>
-            <li>Follow-up Office Hours (x2)</li>
-            <li>Total Virtual Hours: 4</li>
-            <li>On-Site Tech Check Day</li>
-          </ul>
-          <div class="tier-note">Foundation for single-site starts.</div>
-        </div>
-        <div class="tier-card tier-gold">
-          <div class="tier-title" style="color:#92400e;">Gold</div>
-          <div class="tier-subtitle">Teacher Essentials (Minimum recommendation)</div>
-          <hr>
-          <ul>
-            <li>Virtual Planning + Tech Check</li>
-            <li>2 On-site PL Days</li>
-            <li>1 On-site Coaching Day</li>
-            <li>Follow-up Office Hours (x3)</li>
-            <li>Total Virtual Hours: 5</li>
-            <li>On-Site Tech Check Day</li>
-          </ul>
-          <div class="tier-note">Recommended baseline for most sites.</div>
-        </div>
+      <div class="tier-card tier-bronze">
+        <div class="tier-title" style="color:#374151;">Bronze</div>
+        <div class="tier-subtitle">zSpace Basic</div>
+        <hr>
+        <ul>
+          <li>Virtual Planning + Tech Check</li>
+          <li>1-hr Virtual Getting Started PL</li>
+          <li>Follow-up Office Hours (x1)</li>
+          <li>Total Virtual Hours: 3</li>
+        </ul>
+        <div class="tier-note">Great for very small pilots.</div>
       </div>
-      <!-- Bottom Row (now 3 cards) -->
-<div class="tier-row">
-  <!-- Platinum -->
-  <div class="tier-card tier-platinum">
-    <div class="tier-title" style="color:#065f46;">Platinum</div>
-    <div class="tier-subtitle">Teaching & Learning (for large impl. or 2-yr licenses)</div>
-    <hr>
-    <ul>
-      <li>Virtual Planning + Tech Check</li>
-      <li>3 On-site PL Days</li>
-      <li>1 On-site Coaching Day</li>
-      <li>1 On-site Curriculum Integration Day</li>
-      <li>Follow-up Office Hours (x5)</li>
-      <li>Total Virtual Hours: 6</li>
-      <li>On-Site Tech Check Day</li>
-    </ul>
-    <div class="tier-note">Deeper coaching + integration support.</div>
-  </div>
 
-  <!-- Diamond -->
-  <div class="tier-card tier-diamond">
-    <div class="tier-title" style="color:#831843;">Diamond</div>
-    <div class="tier-subtitle">Teaching & Integration (for large impl. or 3-yr licenses)</div>
-    <hr>
-    <ul>
-      <li>Virtual Planning + Tech Check</li>
-      <li>3 On-site PL Days</li>
-      <li>2 On-site Coaching Days</li>
-      <li>1 On-site Curriculum Integration Day</li>
-      <li>Follow-up Office Hours (x5)</li>
-      <li>Total Virtual Hours: 8</li>
-      <li>On-Site Tech Check Day</li>
-    </ul>
-    <div class="tier-note">Best for multi-year, multi-site success.</div>
-  </div>
-  <!-- A la Cart (new 6th card) -->
-  <div class="tier-card tier-alacarte">
-    <div class="tier-title" style="color:#1e3a8a;">A la Cart</div>
-    <div class="tier-subtitle">Add-ons to customize any package</div>
-    <hr>
-    <ul>
-      <li>Virtual Follow-Up Hours (5×1-hr)</li>
-      <li>Curriculum Integration / Mapping</li>
-      <li>On-Site Coaching (1-1; max 2 teachers/day)</li>
-      <li>Half-Day Professional Learning (add-on)</li>
-    </ul>
-    <div class="tier-note">Available with package purchase.</div>
-  </div>
-</div>
+      <div class="tier-card tier-silver">
+        <div class="tier-title" style="color:#1e3a8a;">Silver</div>
+        <div class="tier-subtitle">Getting Started (5–10 devices, 1 campus)</div>
+        <hr>
+        <ul>
+          <li>Virtual Planning + Tech Check</li>
+          <li>1 On-site PL Day</li>
+          <li>Follow-up Office Hours (x2)</li>
+          <li>Total Virtual Hours: 4</li>
+          <li>On-Site Tech Check Day</li>
+        </ul>
+        <div class="tier-note">Foundation for single-site starts.</div>
+      </div>
+
+      <div class="tier-card tier-gold">
+        <div class="tier-title" style="color:#92400e;">Gold</div>
+        <div class="tier-subtitle">Teacher Essentials (Minimum recommendation)</div>
+        <hr>
+        <ul>
+          <li>Virtual Planning + Tech Check</li>
+          <li>2 On-site PL Days</li>
+          <li>1 On-site Coaching Day</li>
+          <li>Follow-up Office Hours (x3)</li>
+          <li>Total Virtual Hours: 5</li>
+          <li>On-Site Tech Check Day</li>
+        </ul>
+        <div class="tier-note">Recommended baseline for most sites.</div>
+      </div>
+
+      <div class="tier-card tier-platinum">
+        <div class="tier-title" style="color:#065f46;">Platinum</div>
+        <div class="tier-subtitle">Teaching & Learning (for large impl. or 2-yr licenses)</div>
+        <hr>
+        <ul>
+          <li>Virtual Planning + Tech Check</li>
+          <li>3 On-site PL Days</li>
+          <li>1 On-site Coaching Day</li>
+          <li>1 On-site Curriculum Integration Day</li>
+          <li>Follow-up Office Hours (x5)</li>
+          <li>Total Virtual Hours: 6</li>
+          <li>On-Site Tech Check Day</li>
+        </ul>
+        <div class="tier-note">Deeper coaching + integration support.</div>
+      </div>
+
+      <div class="tier-card tier-diamond">
+        <div class="tier-title" style="color:#831843;">Diamond</div>
+        <div class="tier-subtitle">Teaching & Integration (for large impl. or 3-yr licenses)</div>
+        <hr>
+        <ul>
+          <li>Virtual Planning + Tech Check</li>
+          <li>3 On-site PL Days</li>
+          <li>2 On-site Coaching Days</li>
+          <li>1 On-site Curriculum Integration Day</li>
+          <li>Follow-up Office Hours (x5)</li>
+          <li>Total Virtual Hours: 8</li>
+          <li>On-Site Tech Check Day</li>
+        </ul>
+        <div class="tier-note">Best for multi-year, multi-site success.</div>
+      </div>
+
+      <div class="tier-card tier-alacarte">
+        <div class="tier-title" style="color:#1e3a8a;">A la Cart</div>
+        <div class="tier-subtitle">Add-ons to customize any package</div>
+        <hr>
+        <ul>
+          <li>Virtual Follow-Up Hours (5×1-hr)</li>
+          <li>Curriculum Integration / Mapping</li>
+          <li>On-Site Coaching (1-1; max 2 teachers/day)</li>
+          <li>Half-Day Professional Learning (add-on)</li>
+        </ul>
+        <div class="tier-note">Available with package purchase.</div>
+      </div>
     </div>
 
     <!-- ===== DELIVERY SECOND ===== -->
