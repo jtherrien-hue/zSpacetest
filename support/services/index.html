@@ -6,42 +6,67 @@
   <title>zSpace Technical Services & Professional Learning</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:Arial,Helvetica,sans-serif;color:#1f2937;line-height:1.6}
+    body{font-family:Arial,Helvetica,sans-serif;color:#1f2937;line-height:1.6;background:#f9fafb}
     .hero-image{background:url('../../assets/Services_Image.webp') center/cover no-repeat;height:300px}
     .title-strip{background:#3b82c4;color:#fff;text-align:center;padding:18px 12px}
     .title-strip-content{max-width:1100px;margin:0 auto}
     .title-strip h1{font-weight:700;font-size:20px;letter-spacing:.3px;line-height:1.4}
     .title-strip p{opacity:.95;font-size:15px;margin-top:6px;line-height:1.5}
-    .page-body{max-width:1100px;margin:0 auto;padding:28px 16px 40px}
-    .video-container{display:flex;justify-content:center;margin:10px 0 40px}
-    .video-wrapper{width:760px;max-width:100%;box-shadow:0 8px 22px rgba(0,0,0,.15);border-radius:6px;overflow:hidden}
+    .page-body{max-width:1200px;margin:0 auto;padding:40px 16px 60px}
+    .video-container{display:flex;justify-content:center;margin:10px 0 50px}
+    .video-wrapper{width:860px;max-width:100%;box-shadow:0 8px 22px rgba(0,0,0,.15);border-radius:10px;overflow:hidden}
     .video-wrapper iframe{width:100%;height:430px;border:0}
 
-    /* Cards */
-    .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
+    /* Cards layout */
+    .card-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:32px}
     .card-link{
-      flex:1 1 320px;max-width:340px;display:flex;flex-direction:column;justify-content:space-between;
-      text-decoration:none;color:inherit;background:#fff;border:1px solid #e0e7ff;border-radius:12px;
-      box-shadow:0 4px 14px rgba(0,0,0,.06);padding:24px;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
-      position:relative;cursor:pointer
+      flex:1 1 500px;max-width:540px;
+      background:#fff;
+      border-radius:18px;
+      border:1px solid #e0e7ff;
+      box-shadow:0 6px 16px rgba(0,0,0,.06);
+      text-decoration:none;color:inherit;
+      padding:40px 32px;
+      display:flex;flex-direction:column;justify-content:flex-start;
+      transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+      position:relative;cursor:pointer;
     }
-    .card-link:hover{transform:translateY(-8px);box-shadow:0 12px 28px rgba(37,99,169,.15);border-color:#3b82c4}
-    .card-link:focus-visible{outline:3px solid #3b82c4;outline-offset:4px}
-    .card-icon{text-align:center;font-size:36px}
-    .card-link h3{text-align:center;color:#2563a9;margin:8px 0;font-size:18px}
-    .card-description{font-size:14px;color:#4b5563;line-height:1.6;text-align:center}
-    .card-link ul{font-size:13px;color:#374151;line-height:1.6;margin:14px 0 0 18px;padding-left:0}
-    .card-link li{margin-bottom:4px}
 
-    .cta-strip{background:#3b82c4;color:#fff;padding:22px 12px;text-align:center}
+    /* blue shadow top */
+    .card-link::before{
+      content:"";
+      position:absolute;
+      top:0;left:0;right:0;
+      height:5px;
+      border-top-left-radius:18px;
+      border-top-right-radius:18px;
+      background:linear-gradient(90deg,#0066cc,#3b82f6);
+      opacity:.85;
+      box-shadow:0 0 10px rgba(59,130,246,.4);
+    }
+
+    .card-link:hover{
+      transform:translateY(-8px);
+      box-shadow:0 16px 32px rgba(37,99,169,.18);
+      border-color:#3b82c4;
+    }
+    .card-link:focus-visible{outline:3px solid #3b82c4;outline-offset:4px}
+
+    .card-icon{text-align:center;font-size:44px;margin-bottom:8px}
+    .card-link h3{text-align:center;color:#1e3a8a;margin:8px 0 14px;font-size:22px;font-weight:800}
+    .card-description{text-align:center;font-size:15px;color:#4b5563;line-height:1.6;margin-bottom:18px}
+    .card-link ul{font-size:14px;color:#374151;line-height:1.7;margin-left:22px}
+    .card-link li{margin-bottom:6px}
+
+    .cta-strip{background:#3b82c4;color:#fff;padding:30px 12px;text-align:center}
     .cta-strip-content{max-width:1100px;margin:0 auto}
-    .cta-strip-title{font-weight:800;letter-spacing:.2px;margin-bottom:8px}
-    .cta-button{display:inline-block;padding:10px 16px;background:#0066cc;color:#fff;border-radius:8px;text-decoration:none;font-weight:800;font-size:13px;transition:background-color .2s,transform .2s}
+    .cta-strip-title{font-weight:800;letter-spacing:.2px;margin-bottom:10px;font-size:18px}
+    .cta-button{display:inline-block;padding:12px 20px;background:#0066cc;color:#fff;border-radius:8px;text-decoration:none;font-weight:800;font-size:14px;transition:background-color .2s,transform .2s}
     .cta-button:hover{background:#0052a3;transform:translateY(-2px)}
 
     @media (max-width:768px){
       .video-wrapper iframe{height:300px}
-      .card-link{max-width:100%}
+      .card-link{max-width:100%;padding:28px 20px}
     }
   </style>
   <script>
@@ -77,38 +102,32 @@
       </div>
     </div>
 
-    <!-- TWO-CARD GRID -->
+    <!-- SERVICES CARDS -->
     <div class="card-grid">
-      <!-- Professional Learning -->
       <a class="card-link" href="../pl_service/">
-        <div>
-          <div class="card-icon">🎓</div>
-          <h3>Professional Learning</h3>
-          <p class="card-description">
-            Inspire curiosity and accelerate understanding through hands-on AR/VR professional learning for educators and district teams.
-          </p>
-          <ul>
-            <li>On-site and remote PL workshops</li>
-            <li>Curriculum integration &amp; lesson design</li>
-            <li>Ongoing PD and office hours</li>
-          </ul>
-        </div>
+        <div class="card-icon">🎓</div>
+        <h3>Professional Learning</h3>
+        <p class="card-description">
+          Inspire curiosity and accelerate understanding through hands-on AR/VR professional learning for educators and district teams.
+        </p>
+        <ul>
+          <li><strong>On-site and Remote Workshops:</strong> Engage educators in immersive training sessions.</li>
+          <li><strong>Curriculum Integration:</strong> Collaborate to align AR/VR content with standards.</li>
+          <li><strong>Ongoing PD and Office Hours:</strong> Continuous support for implementation success.</li>
+        </ul>
       </a>
 
-      <!-- Technical Services -->
       <a class="card-link" href="https://support.zspace.com/s/technical-services">
-        <div>
-          <div class="card-icon">🧰</div>
-          <h3>Technical Services</h3>
-          <p class="card-description">
-            Ensure your zSpace deployment runs flawlessly with expert setup, validation, and ongoing support for your IT and classroom teams.
-          </p>
-          <ul>
-            <li>Tech Readiness meetings</li>
-            <li>On-site and remote deployment</li>
-            <li>App Manager &amp; network optimization</li>
-          </ul>
-        </div>
+        <div class="card-icon">🧰</div>
+        <h3>Technical Services</h3>
+        <p class="card-description">
+          Ensure your zSpace deployment runs flawlessly with expert setup, validation, and ongoing support for your IT and classroom teams.
+        </p>
+        <ul>
+          <li><strong>Tech Readiness Meetings:</strong> Verify devices, apps, and network configurations.</li>
+          <li><strong>On-site and Remote Deployment:</strong> Expert assistance from setup to validation.</li>
+          <li><strong>App Manager & Network Optimization:</strong> Maintain performance and uptime.</li>
+        </ul>
       </a>
     </div>
   </div>
