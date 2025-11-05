@@ -1,0 +1,898 @@
+import React, { useState, useMemo } from 'react';
+import { Search, Download, Plus, ChevronRight, Package, Key, Calendar, MapPin, ShoppingCart, List, Grid, Users, Mail, Phone } from 'lucide-react';
+
+const colors = {
+  primaryDark: '#194F7B',
+  primary: '#267ABF',
+  primaryLight: '#EEF6FC',
+  danger: '#D03025',
+  black: '#0A0A0A',
+  greyDarker: '#363636',
+  grey: '#B5B5B5',
+  greyLight: '#DBDBDB',
+  background: '#F5F5F5',
+  white: '#FFFFFF'
+};
+
+const ZSpaceDashboard = () => {
+  const [currentView, setCurrentView] = useState('summary');
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [selectedSchool, setSelectedSchool] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDevice, setSelectedDevice] = useState(null);
+
+  const account = {
+    name: 'Loudoun County Public Schools',
+    department: 'Department of Digital Innovation',
+    accountManager: 'Mike Chen',
+    status: 'active'
+  };
+
+  const salesOrders = [
+    {
+      id: 'SO17714',
+      date: '11/7/2022',
+      customer: 'Loudoun County Public Schools Department of Digital Innovation',
+      hardware: { aios: 7, aioPro: 0, oeLaptops: 0, inspires: 0, inspirePro: 0, inspire2: 0, imagine: 0, carts: 1 },
+      licenses: { zView: 7, studioA3: 0, careerCoach: 0, experiences: 0, franklinsLab: 0, mathIsland: 0, newtonsPark: 0, visibleBody: 0, vivedScience: 0 },
+      status: 'delivered'
+    },
+    {
+      id: 'SO17743',
+      date: '11/9/2022',
+      customer: 'Loudoun County Public Schools Department of Digital Innovation',
+      hardware: { aios: 2, aioPro: 0, oeLaptops: 0, inspires: 0, inspirePro: 0, inspire2: 0, imagine: 0, carts: 2 },
+      licenses: { zView: 0, studioA3: 0, careerCoach: 0, experiences: 0, franklinsLab: 0, mathIsland: 0, newtonsPark: 0, visibleBody: 0, vivedScience: 0 },
+      status: 'delivered'
+    },
+    {
+      id: 'SO19729',
+      date: '12/13/2023',
+      customer: 'Loudoun County Public Schools Department of Digital Innovation',
+      hardware: { aios: 0, aioPro: 0, oeLaptops: 0, inspires: 13, inspirePro: 0, inspire2: 0, imagine: 0, carts: 1 },
+      licenses: { zView: 13, studioA3: 13, careerCoach: 0, experiences: 0, franklinsLab: 0, mathIsland: 0, newtonsPark: 0, visibleBody: 0, vivedScience: 0 },
+      status: 'delivered'
+    },
+    {
+      id: 'SO21790',
+      date: '3/28/2025',
+      customer: 'Loudoun County Public Schools Department of Digital Innovation',
+      hardware: { aios: 0, aioPro: 0, oeLaptops: 0, inspires: 0, inspirePro: 0, inspire2: 0, imagine: 12, carts: 0 },
+      licenses: { zView: 12, studioA3: 12, careerCoach: 12, experiences: 12, franklinsLab: 12, mathIsland: 12, newtonsPark: 12, visibleBody: 0, vivedScience: 12 },
+      status: 'delivered'
+    },
+    {
+      id: 'SO22208',
+      date: '6/26/2025',
+      customer: 'Loudoun County Public Schools',
+      hardware: { aios: 0, aioPro: 0, oeLaptops: 0, inspires: 15, inspirePro: 0, inspire2: 0, imagine: 0, carts: 1 },
+      licenses: { zView: 15, studioA3: 15, careerCoach: 15, experiences: 0, franklinsLab: 0, mathIsland: 0, newtonsPark: 0, visibleBody: 0, vivedScience: 0 },
+      status: 'hold',
+      notes: 'HOLD FOR FIRM PO'
+    },
+    {
+      id: 'SO22209',
+      date: '6/26/2025',
+      customer: 'Loudoun County Public Schools Department of Digital Innovation',
+      hardware: { aios: 0, aioPro: 0, oeLaptops: 0, inspires: 15, inspirePro: 0, inspire2: 0, imagine: 0, carts: 1 },
+      licenses: { zView: 15, studioA3: 15, careerCoach: 15, experiences: 0, franklinsLab: 0, mathIsland: 0, newtonsPark: 0, visibleBody: 0, vivedScience: 0 },
+      status: 'hold',
+      notes: 'HOLD FOR FIRM PO'
+    }
+  ];
+
+  const schools = [
+    { id: 1, name: 'Lincoln High School', devices: 15, salesOrders: ['SO17714', 'SO19729'] },
+    { id: 2, name: 'Madison Middle School', devices: 12, salesOrders: ['SO21790'] },
+    { id: 3, name: 'Monroe Elementary', devices: 10, salesOrders: ['SO17743'] },
+    { id: 4, name: 'Jefferson Campus', devices: 13, salesOrders: ['SO22208', 'SO22209'] }
+  ];
+
+  const devices = [
+    {
+      id: 1,
+      salesOrder: 'SO21790',
+      school: 'Madison Middle School',
+      cartBay: 'ZO1R000122',
+      deviceType: 'Imagine',
+      serialNumber: 'ZO1R000122',
+      licenses: {
+        zView: { key: 'FRK3-KUKG-UGY6-FM9W', type: 'perpetual', expires: 'N/A' },
+        studioA3: { key: 'E58U-H5BY-WNHH-5TK4', type: 'subscription', expires: '5/19/2028' },
+        careerCoach: { key: 'UCQ3-TD69-5XRU-D4KX', type: 'subscription', expires: '5/19/2028' },
+        experiences: { key: 'QIYV-EFP7-N8DC-FZ9C', type: 'subscription', expires: '5/19/2028' },
+        franklinsLab: { key: '2N3R-QVMC-SRB5-MJPW', type: 'subscription', expires: '5/19/2028' },
+        mathIsland: { key: '84ZX-RA53-KDJY-3748', type: 'subscription', expires: '5/19/2028' },
+        newtonsPark: { key: 'CM5P-26HS-24ZH-V6W3', type: 'subscription', expires: '5/19/2028' },
+        vivedScience: { key: 'DIF9-KG62-ZGWE-B5D5', type: 'subscription', expires: '5/19/2028' }
+      }
+    },
+    {
+      id: 2,
+      salesOrder: 'SO21790',
+      school: 'Madison Middle School',
+      cartBay: 'ZO1R000080',
+      deviceType: 'Imagine',
+      serialNumber: 'ZO1R000080',
+      licenses: {
+        zView: { key: 'FRK3-KUKG-UGY6-FM9W', type: 'perpetual', expires: 'N/A' },
+        studioA3: { key: 'E58U-H5BY-WNHH-5TK4', type: 'subscription', expires: '5/19/2028' },
+        careerCoach: { key: 'UCQ3-TD69-5XRU-D4KX', type: 'subscription', expires: '5/19/2028' }
+      }
+    },
+    {
+      id: 3,
+      salesOrder: 'SO19729',
+      school: 'Lincoln High School',
+      cartBay: '0001-1',
+      deviceType: 'Inspire',
+      serialNumber: 'NXC73AA004243021FF7600',
+      licenses: {
+        zView: { key: 'HZIG-UUKW-ZV7P-59VK', type: 'perpetual', expires: 'N/A' },
+        studioA3: { key: '3YTC-PQC7-5X7H-BKQK', type: 'subscription', expires: '5/19/2028' }
+      }
+    }
+  ];
+
+  const customerContacts = [
+    { id: 1, firstName: 'John', lastName: 'Smith', salutation: 'Mr.', role: 'IT Director', schoolName: 'Lincoln High School', email: 'jsmith@lcps.org', phone: '571-555-0123' },
+    { id: 2, firstName: 'Sarah', lastName: 'Johnson', salutation: 'Ms.', role: 'Technology Coordinator', schoolName: 'Madison Middle School', email: 'sjohnson@lcps.org', phone: '571-555-0124' },
+    { id: 3, firstName: 'Michael', lastName: 'Brown', salutation: 'Dr.', role: 'STEM Director', schoolName: 'Monroe Elementary', email: 'mbrown@lcps.org', phone: '571-555-0125' },
+    { id: 4, firstName: 'Emily', lastName: 'Davis', salutation: 'Mrs.', role: 'Principal', schoolName: 'Jefferson Campus', email: 'edavis@lcps.org', phone: '571-555-0126' },
+    { id: 5, firstName: 'Robert', lastName: 'Wilson', salutation: 'Mr.', role: 'Assistant Principal', schoolName: 'Lincoln High School', email: 'rwilson@lcps.org', phone: '571-555-0127' }
+  ];
+
+  const zspaceContacts = [
+    { id: 1, name: 'Brenda Berube', email: 'bberube@zspace.com', role: 'Sr. Customer Success Manager', phone: '407-640-1464' },
+    { id: 2, name: 'Greg Johnson', email: 'gjohnson@zspace.com', role: 'Regional Director', phone: '540-233-2028' },
+    { id: 3, name: 'Amy Rocke', email: 'clientservices@zspace.com', role: 'Onboarding Manager', phone: '' },
+    { id: 4, name: 'Pete Castro', email: 'renewals@zspace.com', role: 'Renewals Manager', phone: '' }
+  ];
+
+  const orderStats = useMemo(() => {
+    const totalHardware = salesOrders.reduce((sum, order) => {
+      return sum + Object.values(order.hardware).reduce((a, b) => a + b, 0);
+    }, 0);
+
+    const totalLicenses = salesOrders.reduce((sum, order) => {
+      return sum + Object.values(order.licenses).reduce((a, b) => a + b, 0);
+    }, 0);
+
+    const deliveredOrders = salesOrders.filter(o => o.status === 'delivered').length;
+    const holdOrders = salesOrders.filter(o => o.status === 'hold').length;
+
+    return { totalOrders: salesOrders.length, totalHardware, totalLicenses, deliveredOrders, holdOrders };
+  }, []);
+
+  const filteredDevices = useMemo(() => {
+    if (!searchQuery) return devices;
+    const query = searchQuery.toLowerCase();
+    return devices.filter(device => 
+      device.serialNumber.toLowerCase().includes(query) ||
+      device.cartBay.toLowerCase().includes(query) ||
+      device.school.toLowerCase().includes(query) ||
+      device.deviceType.toLowerCase().includes(query) ||
+      device.salesOrder.toLowerCase().includes(query)
+    );
+  }, [searchQuery]);
+
+  const filteredSchools = useMemo(() => {
+    if (!searchQuery) return schools;
+    const query = searchQuery.toLowerCase();
+    return schools.filter(school => 
+      school.name.toLowerCase().includes(query)
+    );
+  }, [searchQuery]);
+
+  const filteredContacts = useMemo(() => {
+    if (!searchQuery) return customerContacts;
+    const query = searchQuery.toLowerCase();
+    return customerContacts.filter(contact => 
+      `${contact.firstName} ${contact.lastName}`.toLowerCase().includes(query) ||
+      contact.email.toLowerCase().includes(query) ||
+      contact.role.toLowerCase().includes(query) ||
+      contact.schoolName.toLowerCase().includes(query)
+    );
+  }, [searchQuery]);
+
+  const getStatusBadge = (status) => {
+    if (status === 'delivered') return 'bg-green-100 text-green-800';
+    if (status === 'hold') return 'bg-yellow-100 text-yellow-800';
+    return 'bg-gray-100 text-gray-800';
+  };
+
+  return (
+    <div className="min-h-screen" style={{ backgroundColor: colors.background, fontFamily: 'Ubuntu, system-ui, -apple-system, sans-serif' }}>
+      {/* Header */}
+      <div className="border-b" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)` }}>
+                <span className="text-white font-bold text-lg">Z</span>
+              </div>
+              <div>
+                <h1 className="text-xl font-medium tracking-wide" style={{ color: colors.primary, letterSpacing: '0.025em' }}>
+                  {account.name}
+                </h1>
+                <p className="text-xs" style={{ color: colors.grey }}>{account.department}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2" style={{ color: colors.grey }} />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 transition-all"
+                  style={{ 
+                    borderColor: colors.greyLight,
+                    backgroundColor: colors.white,
+                    color: colors.greyDarker
+                  }}
+                />
+              </div>
+              <button className="flex items-center gap-2 px-4 py-2 text-white rounded-lg font-medium transition-all hover:opacity-90 shadow-md" style={{ backgroundColor: colors.primary }}>
+                <Plus className="w-4 h-4" />
+                New Order
+              </button>
+              <button className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight, color: colors.greyDarker }}>
+                <Download className="w-4 h-4" />
+                Export
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="border-b" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex gap-8">
+            <button
+              onClick={() => { setCurrentView('summary'); setSelectedOrder(null); setSelectedSchool(null); setSelectedDevice(null); }}
+              className="py-4 border-b-2 font-medium text-sm transition-colors flex items-center gap-2"
+              style={{
+                borderColor: currentView === 'summary' ? colors.primary : 'transparent',
+                color: currentView === 'summary' ? colors.primary : colors.grey,
+                letterSpacing: '0.014em'
+              }}
+            >
+              <List className="w-4 h-4" />
+              Sales Orders Summary
+            </button>
+            <button
+              onClick={() => { setCurrentView('schools'); setSelectedOrder(null); setSelectedSchool(null); setSelectedDevice(null); }}
+              className="py-4 border-b-2 font-medium text-sm transition-colors flex items-center gap-2"
+              style={{
+                borderColor: currentView === 'schools' ? colors.primary : 'transparent',
+                color: currentView === 'schools' ? colors.primary : colors.grey,
+                letterSpacing: '0.014em'
+              }}
+            >
+              <MapPin className="w-4 h-4" />
+              School Locations
+            </button>
+            <button
+              onClick={() => { setCurrentView('devices'); setSelectedOrder(null); setSelectedSchool(null); setSelectedDevice(null); }}
+              className="py-4 border-b-2 font-medium text-sm transition-colors flex items-center gap-2"
+              style={{
+                borderColor: currentView === 'devices' ? colors.primary : 'transparent',
+                color: currentView === 'devices' ? colors.primary : colors.grey,
+                letterSpacing: '0.014em'
+              }}
+            >
+              <Grid className="w-4 h-4" />
+              Device Inventory
+            </button>
+            <button
+              onClick={() => { setCurrentView('contacts'); setSelectedOrder(null); setSelectedSchool(null); setSelectedDevice(null); }}
+              className="py-4 border-b-2 font-medium text-sm transition-colors flex items-center gap-2"
+              style={{
+                borderColor: currentView === 'contacts' ? colors.primary : 'transparent',
+                color: currentView === 'contacts' ? colors.primary : colors.grey,
+                letterSpacing: '0.014em'
+              }}
+            >
+              <Users className="w-4 h-4" />
+              Contacts
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Sales Orders Summary View */}
+        {currentView === 'summary' && !selectedOrder && (
+          <div className="space-y-6">
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+              <div className="p-5 rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <ShoppingCart className="w-5 h-5" style={{ color: colors.primary }} />
+                  <p className="text-xs font-bold uppercase" style={{ color: colors.grey }}>Total Orders</p>
+                </div>
+                <p className="text-3xl font-medium" style={{ color: colors.greyDarker }}>{orderStats.totalOrders}</p>
+              </div>
+              <div className="p-5 rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+                <p className="text-xs font-bold uppercase mb-2" style={{ color: colors.grey }}>Delivered</p>
+                <p className="text-3xl font-medium text-green-600">{orderStats.deliveredOrders}</p>
+              </div>
+              <div className="p-5 rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+                <p className="text-xs font-bold uppercase mb-2" style={{ color: colors.grey }}>On Hold</p>
+                <p className="text-3xl font-medium text-yellow-600">{orderStats.holdOrders}</p>
+              </div>
+              <div className="p-5 rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <Package className="w-5 h-5" style={{ color: colors.grey }} />
+                  <p className="text-xs font-bold uppercase" style={{ color: colors.grey }}>Total Hardware</p>
+                </div>
+                <p className="text-3xl font-medium" style={{ color: colors.greyDarker }}>{orderStats.totalHardware}</p>
+              </div>
+              <div className="p-5 rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+                <div className="flex items-center gap-2 mb-2">
+                  <Key className="w-5 h-5" style={{ color: colors.grey }} />
+                  <p className="text-xs font-bold uppercase" style={{ color: colors.grey }}>Total Licenses</p>
+                </div>
+                <p className="text-3xl font-medium" style={{ color: colors.greyDarker }}>{orderStats.totalLicenses}</p>
+              </div>
+            </div>
+
+            {/* Orders Table */}
+            <div className="rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+              <div className="p-6 border-b" style={{ borderColor: colors.greyLight }}>
+                <h2 className="text-lg font-medium" style={{ color: colors.primary }}>Sales Orders</h2>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead style={{ backgroundColor: colors.background }}>
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>SO Number</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Hardware</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Licenses</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Notes</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Details</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y" style={{ borderColor: colors.greyLight }}>
+                    {salesOrders.map((order) => {
+                      const hwTotal = Object.values(order.hardware).reduce((a, b) => a + b, 0);
+                      const licTotal = Object.values(order.licenses).reduce((a, b) => a + b, 0);
+                      
+                      return (
+                        <tr key={order.id} className="hover:bg-gray-50">
+                          <td className="px-6 py-4">
+                            <span className="text-sm font-medium" style={{ color: colors.primary }}>{order.id}</span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="flex items-center gap-2">
+                              <Calendar className="w-4 h-4" style={{ color: colors.grey }} />
+                              <span className="text-sm" style={{ color: colors.greyDarker }}>{order.date}</span>
+                            </div>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusBadge(order.status)}`}>
+                              {order.status}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className="text-sm font-medium" style={{ color: colors.greyDarker }}>{hwTotal} units</span>
+                          </td>
+                          <td className="px-6 py-4">
+                            <span className="text-sm font-medium" style={{ color: colors.greyDarker }}>{licTotal} licenses</span>
+                          </td>
+                          <td className="px-6 py-4">
+                            {order.notes && (
+                              <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: colors.primaryLight, color: colors.primary }}>
+                                {order.notes}
+                              </span>
+                            )}
+                          </td>
+                          <td className="px-6 py-4">
+                            <button 
+                              onClick={() => setSelectedOrder(order)}
+                              className="text-sm font-medium hover:underline flex items-center gap-1"
+                              style={{ color: colors.primary }}
+                            >
+                              View Details
+                              <ChevronRight className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Order Detail View */}
+        {currentView === 'summary' && selectedOrder && (
+          <div className="space-y-6">
+            <button 
+              onClick={() => setSelectedOrder(null)}
+              className="text-sm font-medium hover:underline"
+              style={{ color: colors.primary }}
+            >
+              ← Back to Sales Orders
+            </button>
+
+            <div className="rounded-lg shadow-md border p-6" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+              <div className="flex items-start justify-between mb-6">
+                <div>
+                  <h2 className="text-2xl font-medium" style={{ color: colors.greyDarker }}>{selectedOrder.id}</h2>
+                  <p className="text-sm" style={{ color: colors.grey }}>{selectedOrder.customer}</p>
+                  <p className="text-sm mt-1" style={{ color: colors.grey }}>Order Date: {selectedOrder.date}</p>
+                </div>
+                <span className={`px-4 py-2 text-sm font-semibold rounded-full ${getStatusBadge(selectedOrder.status)}`}>
+                  {selectedOrder.status}
+                </span>
+              </div>
+
+              {selectedOrder.notes && (
+                <div className="mb-6 p-4 rounded border-l-4" style={{ backgroundColor: colors.primaryLight, borderColor: colors.primary }}>
+                  <p className="text-sm font-medium" style={{ color: colors.primary }}>Note: {selectedOrder.notes}</p>
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Hardware */}
+                <div className="p-4 rounded-lg border" style={{ backgroundColor: colors.background, borderColor: colors.greyLight }}>
+                  <h3 className="text-lg font-medium mb-4" style={{ color: colors.greyDarker }}>Hardware</h3>
+                  <div className="space-y-2">
+                    {Object.entries(selectedOrder.hardware).map(([key, value]) => {
+                      if (value === 0) return null;
+                      return (
+                        <div key={key} className="flex justify-between items-center">
+                          <span className="text-sm capitalize" style={{ color: colors.grey }}>{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                          <span className="text-sm font-medium" style={{ color: colors.greyDarker }}>{value}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Licenses */}
+                <div className="p-4 rounded-lg border" style={{ backgroundColor: colors.background, borderColor: colors.greyLight }}>
+                  <h3 className="text-lg font-medium mb-4" style={{ color: colors.greyDarker }}>Software Licenses</h3>
+                  <div className="space-y-2">
+                    {Object.entries(selectedOrder.licenses).map(([key, value]) => {
+                      if (value === 0) return null;
+                      const isPerpetual = key === 'zView';
+                      return (
+                        <div key={key} className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm" style={{ color: colors.grey }}>{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                            <span className={`px-2 py-0.5 text-xs rounded ${isPerpetual ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                              {isPerpetual ? 'Perpetual' : 'Subscription'}
+                            </span>
+                          </div>
+                          <span className="text-sm font-medium" style={{ color: colors.greyDarker }}>{value}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Schools View */}
+        {currentView === 'schools' && !selectedSchool && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-medium" style={{ color: colors.primary }}>School Locations</h2>
+              <span className="text-sm" style={{ color: colors.grey }}>{filteredSchools.length} locations</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredSchools.map((school) => (
+                <div 
+                  key={school.id}
+                  className="p-6 rounded-lg shadow-md border cursor-pointer transition-all hover:shadow-lg"
+                  style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}
+                  onClick={() => setSelectedSchool(school)}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-5 h-5" style={{ color: colors.primary }} />
+                      <h3 className="font-medium" style={{ color: colors.greyDarker }}>{school.name}</h3>
+                    </div>
+                    <ChevronRight className="w-5 h-5" style={{ color: colors.grey }} />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm" style={{ color: colors.grey }}>Devices</span>
+                      <span className="text-sm font-medium" style={{ color: colors.primary }}>{school.devices}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-sm" style={{ color: colors.grey }}>Sales Orders</span>
+                      <span className="text-sm font-medium" style={{ color: colors.greyDarker }}>{school.salesOrders.length}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* School Detail View */}
+        {currentView === 'schools' && selectedSchool && (
+          <div className="space-y-6">
+            <button 
+              onClick={() => setSelectedSchool(null)}
+              className="text-sm font-medium hover:underline"
+              style={{ color: colors.primary }}
+            >
+              ← Back to School Locations
+            </button>
+
+            <div className="rounded-lg shadow-md border p-6" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+              <div className="flex items-start gap-3 mb-6">
+                <MapPin className="w-6 h-6" style={{ color: colors.primary }} />
+                <div>
+                  <h2 className="text-2xl font-medium" style={{ color: colors.greyDarker }}>{selectedSchool.name}</h2>
+                  <p className="text-sm" style={{ color: colors.grey }}>{selectedSchool.devices} devices deployed</p>
+                </div>
+              </div>
+
+              {/* School Stats */}
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <div className="p-4 rounded-lg" style={{ backgroundColor: colors.background }}>
+                  <p className="text-xs font-bold uppercase mb-1" style={{ color: colors.grey }}>Total Devices</p>
+                  <p className="text-2xl font-medium" style={{ color: colors.primary }}>{selectedSchool.devices}</p>
+                </div>
+                <div className="p-4 rounded-lg" style={{ backgroundColor: colors.background }}>
+                  <p className="text-xs font-bold uppercase mb-1" style={{ color: colors.grey }}>Sales Orders</p>
+                  <p className="text-2xl font-medium" style={{ color: colors.greyDarker }}>{selectedSchool.salesOrders.length}</p>
+                </div>
+                <div className="p-4 rounded-lg" style={{ backgroundColor: colors.background }}>
+                  <p className="text-xs font-bold uppercase mb-1" style={{ color: colors.grey }}>Contacts</p>
+                  <p className="text-2xl font-medium" style={{ color: colors.greyDarker }}>
+                    {customerContacts.filter(c => c.schoolName === selectedSchool.name).length}
+                  </p>
+                </div>
+              </div>
+
+              {/* Associated Sales Orders */}
+              <div className="mb-6">
+                <h3 className="text-lg font-medium mb-3" style={{ color: colors.greyDarker }}>Associated Sales Orders</h3>
+                <div className="space-y-2">
+                  {selectedSchool.salesOrders.map(soId => {
+                    const order = salesOrders.find(o => o.id === soId);
+                    return (
+                      <div key={soId} className="p-3 rounded border flex items-center justify-between" style={{ backgroundColor: colors.background, borderColor: colors.greyLight }}>
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-medium" style={{ color: colors.primary }}>{soId}</span>
+                          <span className="text-sm" style={{ color: colors.grey }}>{order?.date}</span>
+                          <span className={`px-2 py-1 text-xs font-semibold rounded ${getStatusBadge(order?.status)}`}>
+                            {order?.status}
+                          </span>
+                        </div>
+                        <button 
+                          onClick={() => {
+                            setCurrentView('summary');
+                            setSelectedOrder(order);
+                            setSelectedSchool(null);
+                          }}
+                          className="text-sm font-medium hover:underline"
+                          style={{ color: colors.primary }}
+                        >
+                          View Order
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* School Contacts */}
+              <div>
+                <h3 className="text-lg font-medium mb-3" style={{ color: colors.greyDarker }}>Contacts</h3>
+                <div className="space-y-2">
+                  {customerContacts.filter(c => c.schoolName === selectedSchool.name).map(contact => (
+                    <div key={contact.id} className="p-4 rounded border flex items-center gap-4" style={{ backgroundColor: colors.background, borderColor: colors.greyLight }}>
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center font-medium text-white flex-shrink-0" style={{ backgroundColor: colors.primary }}>
+                        {contact.firstName[0]}{contact.lastName[0]}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium" style={{ color: colors.greyDarker }}>
+                          {contact.salutation} {contact.firstName} {contact.lastName}
+                        </p>
+                        <p className="text-xs" style={{ color: colors.grey }}>{contact.role}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <a href={`mailto:${contact.email}`} className="p-2 rounded hover:bg-white transition-colors">
+                          <Mail className="w-4 h-4" style={{ color: colors.primary }} />
+                        </a>
+                        <a href={`tel:${contact.phone}`} className="p-2 rounded hover:bg-white transition-colors">
+                          <Phone className="w-4 h-4" style={{ color: colors.greyDarker }} />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Devices View */}
+        {currentView === 'devices' && !selectedDevice && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-medium" style={{ color: colors.primary }}>Device Inventory</h2>
+              <span className="text-sm" style={{ color: colors.grey }}>{filteredDevices.length} devices</span>
+            </div>
+            <div className="space-y-4">
+              {filteredDevices.map((device) => (
+                <div 
+                  key={device.id}
+                  className="p-6 rounded-lg shadow-md border cursor-pointer hover:shadow-lg transition-all"
+                  style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}
+                  onClick={() => setSelectedDevice(device)}
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Package className="w-5 h-5" style={{ color: colors.primary }} />
+                        <h3 className="text-lg font-medium" style={{ color: colors.greyDarker }}>{device.deviceType} - {device.cartBay}</h3>
+                      </div>
+                      <p className="text-sm" style={{ color: colors.grey }}>Serial: {device.serialNumber}</p>
+                      <p className="text-sm" style={{ color: colors.grey }}>{device.school} | SO: {device.salesOrder}</p>
+                    </div>
+                    <ChevronRight className="w-5 h-5" style={{ color: colors.grey }} />
+                  </div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: colors.primaryLight, color: colors.primary }}>
+                      {Object.keys(device.licenses).length} licenses
+                    </span>
+                    <span className="text-xs px-2 py-1 rounded bg-green-100 text-green-800">
+                      {Object.values(device.licenses).filter(l => l.type === 'perpetual').length} perpetual
+                    </span>
+                    <span className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-800">
+                      {Object.values(device.licenses).filter(l => l.type === 'subscription').length} subscription
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Device Detail View */}
+        {currentView === 'devices' && selectedDevice && (
+          <div className="space-y-6">
+            <button 
+              onClick={() => setSelectedDevice(null)}
+              className="text-sm font-medium hover:underline"
+              style={{ color: colors.primary }}
+            >
+              ← Back to Device Inventory
+            </button>
+
+            <div className="rounded-lg shadow-md border p-6" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+              <div className="flex items-start gap-3 mb-6">
+                <Package className="w-6 h-6" style={{ color: colors.primary }} />
+                <div>
+                  <h2 className="text-2xl font-medium" style={{ color: colors.greyDarker }}>{selectedDevice.deviceType}</h2>
+                  <p className="text-sm" style={{ color: colors.grey }}>Cart/Bay: {selectedDevice.cartBay}</p>
+                </div>
+              </div>
+
+              {/* Device Info */}
+              <div className="grid grid-cols-2 gap-4 mb-6 p-4 rounded-lg" style={{ backgroundColor: colors.background }}>
+                <div>
+                  <p className="text-xs font-bold uppercase mb-1" style={{ color: colors.grey }}>Serial Number</p>
+                  <p className="text-sm font-mono" style={{ color: colors.greyDarker }}>{selectedDevice.serialNumber}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase mb-1" style={{ color: colors.grey }}>Sales Order</p>
+                  <button 
+                    onClick={() => {
+                      const order = salesOrders.find(o => o.id === selectedDevice.salesOrder);
+                      setCurrentView('summary');
+                      setSelectedOrder(order);
+                      setSelectedDevice(null);
+                    }}
+                    className="text-sm font-medium hover:underline"
+                    style={{ color: colors.primary }}
+                  >
+                    {selectedDevice.salesOrder}
+                  </button>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase mb-1" style={{ color: colors.grey }}>School Location</p>
+                  <button 
+                    onClick={() => {
+                      const school = schools.find(s => s.name === selectedDevice.school);
+                      setCurrentView('schools');
+                      setSelectedSchool(school);
+                      setSelectedDevice(null);
+                    }}
+                    className="text-sm hover:underline flex items-center gap-1"
+                    style={{ color: colors.primary }}
+                  >
+                    <MapPin className="w-3 h-3" />
+                    {selectedDevice.school}
+                  </button>
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase mb-1" style={{ color: colors.grey }}>Total Licenses</p>
+                  <p className="text-sm font-medium" style={{ color: colors.greyDarker }}>{Object.keys(selectedDevice.licenses).length}</p>
+                </div>
+              </div>
+
+              {/* License Keys */}
+              <div>
+                <h3 className="text-lg font-medium mb-4" style={{ color: colors.greyDarker }}>Software Licenses</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {Object.entries(selectedDevice.licenses).map(([key, license]) => (
+                    <div key={key} className="p-4 rounded border" style={{ backgroundColor: colors.background, borderColor: colors.greyLight }}>
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-xs font-bold uppercase" style={{ color: colors.primary }}>{key}</span>
+                        <span className={`px-2 py-0.5 text-xs rounded ${license.type === 'perpetual' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}`}>
+                          {license.type}
+                        </span>
+                      </div>
+                      <div className="space-y-2">
+                        <div>
+                          <p className="text-xs font-bold mb-1" style={{ color: colors.grey }}>License Key</p>
+                          <div className="flex items-center justify-between gap-2 p-2 rounded" style={{ backgroundColor: colors.white }}>
+                            <p className="text-xs font-mono" style={{ color: colors.greyDarker }}>{license.key}</p>
+                            <button 
+                              onClick={() => navigator.clipboard.writeText(license.key)}
+                              className="p-1 rounded hover:bg-gray-100 transition-colors flex-shrink-0"
+                              title="Copy to clipboard"
+                            >
+                              <Key className="w-3 h-3" style={{ color: colors.grey }} />
+                            </button>
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold mb-1" style={{ color: colors.grey }}>Expiration</p>
+                          <div className="flex items-center gap-1">
+                            <Calendar className="w-3 h-3" style={{ color: colors.grey }} />
+                            <p className="text-xs" style={{ color: license.expires === 'N/A' ? colors.grey : colors.greyDarker }}>
+                              {license.expires}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Contacts View */}
+        {currentView === 'contacts' && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-medium" style={{ color: colors.primary }}>Contacts</h2>
+            
+            {/* Customer Contacts */}
+            <div className="rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+              <div className="p-6 border-b flex items-center justify-between" style={{ borderColor: colors.greyLight }}>
+                <div className="flex items-center gap-2">
+                  <Users className="w-5 h-5" style={{ color: colors.primary }} />
+                  <h3 className="text-lg font-medium" style={{ color: colors.greyDarker }}>Customer Contacts</h3>
+                </div>
+                <button className="flex items-center gap-2 px-4 py-2 text-white rounded-lg font-medium transition-all hover:opacity-90 shadow-sm" style={{ backgroundColor: colors.primary }}>
+                  <Plus className="w-4 h-4" />
+                  Add Contact
+                </button>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead style={{ backgroundColor: colors.background }}>
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Role</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>School</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Email</th>
+                      <th className="px-6 py-3 text-left text-xs font-bold uppercase" style={{ color: colors.grey }}>Phone</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y" style={{ borderColor: colors.greyLight }}>
+                    {filteredContacts.map((contact) => (
+                      <tr key={contact.id} className="hover:bg-gray-50">
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2">
+                            <div className="w-10 h-10 rounded-full flex items-center justify-center font-medium text-white" style={{ backgroundColor: colors.primary }}>
+                              {contact.firstName[0]}{contact.lastName[0]}
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium" style={{ color: colors.greyDarker }}>
+                                {contact.salutation} {contact.firstName} {contact.lastName}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="text-sm" style={{ color: colors.greyDarker }}>{contact.role}</span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-1">
+                            <MapPin className="w-4 h-4" style={{ color: colors.grey }} />
+                            <span className="text-sm" style={{ color: colors.greyDarker }}>{contact.schoolName}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm hover:underline" style={{ color: colors.primary }}>
+                            <Mail className="w-4 h-4" />
+                            {contact.email}
+                          </a>
+                        </td>
+                        <td className="px-6 py-4">
+                          <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm hover:underline" style={{ color: colors.greyDarker }}>
+                            <Phone className="w-4 h-4" />
+                            {contact.phone}
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* zSpace Team Contacts */}
+            <div className="rounded-lg shadow-md border" style={{ backgroundColor: colors.white, borderColor: colors.greyLight }}>
+              <div className="p-6 border-b" style={{ borderColor: colors.greyLight }}>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded flex items-center justify-center" style={{ background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)` }}>
+                    <span className="text-white font-bold text-sm">Z</span>
+                  </div>
+                  <h3 className="text-lg font-medium" style={{ color: colors.greyDarker }}>zSpace Team</h3>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {zspaceContacts.map((contact) => (
+                    <div 
+                      key={contact.id}
+                      className="p-4 rounded-lg border"
+                      style={{ backgroundColor: colors.background, borderColor: colors.greyLight }}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center font-medium text-white flex-shrink-0" style={{ backgroundColor: colors.primaryDark }}>
+                          {contact.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-medium truncate" style={{ color: colors.greyDarker }}>{contact.name}</h4>
+                          <p className="text-sm mb-2" style={{ color: colors.grey }}>{contact.role}</p>
+                          <div className="space-y-1">
+                            <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm hover:underline" style={{ color: colors.primary }}>
+                              <Mail className="w-4 h-4 flex-shrink-0" />
+                              <span className="truncate">{contact.email}</span>
+                            </a>
+                            {contact.phone && (
+                              <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm hover:underline" style={{ color: colors.greyDarker }}>
+                                <Phone className="w-4 h-4 flex-shrink-0" />
+                                {contact.phone}
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ZSpaceDashboard;
